@@ -1,28 +1,28 @@
-== README
+This is Client Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+built on Ruby version 2.1.5 p273
+using Ruby on Rails version 4.2.3
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Dependencies:
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Notes:
+
+Generate new app
+Set up git and github
+enable bootstrap
+build index view (homepage)
+create user model
+create user table
+build heder partial
+build menu partial
+build filter partial
+build client_list partial
+create artist model
+create event model
+create venue model
+create artist table
+create event table
+create venue table
+create join models
+create join tables
