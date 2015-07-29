@@ -11,6 +11,7 @@ Notes:
 Generate new app
 Set up git and github
 enable bootstrap
+create route homepage
 build index view (homepage)
 create user model
 create user table
