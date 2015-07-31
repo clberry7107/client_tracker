@@ -8,10 +8,8 @@ $navbar-default-color: #1C3F79;
 @import "bootstrap";
 
 #logo {
-   margin-top: 10px;
-   margin-bottom: 10px;
+   margin: 10px;
    float: left;
-   margin-right: 10px;
    font-size: 2em;
    color: #fff;
    text-transform: uppercase;
@@ -19,7 +17,6 @@ $navbar-default-color: #1C3F79;
    padding-top: 9px;
    font-weight: bold;
    background-color: #1C3F79
-   
 }
 
 #logo:hover {
@@ -34,7 +31,7 @@ body {
 .nav_item {
  margin-left: 25px;
  float: left;
- margin-top: 20px;
+ margin-top: 10px;
 
 }
 
