@@ -1,6 +1,6 @@
-$navbar-default-bg: #FF8000;
+$navbar-default-bg: #B0B0B0;
 $light-orange: #FFCC66;
-$navbar-default-color: $light-orange;
+$navbar-default-color: #1C3F79;
 
 
 
@@ -18,7 +18,7 @@ $navbar-default-color: $light-orange;
    letter-spacing: -1px;
    padding-top: 9px;
    font-weight: bold;
-   
+   background-color: #1C3F79
    
 }
 
@@ -35,6 +35,7 @@ body {
  margin-left: 25px;
  float: left;
  margin-top: 20px;
+
 }
 
 .nav_ul_item {
