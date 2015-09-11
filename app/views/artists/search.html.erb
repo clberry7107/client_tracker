@@ -1,0 +1,9 @@
+<h1>These are your search results!</h1>
+<table>
+	<tr><th>Artist Name </th><th> Genre</th></tr>
+	<% @artists.each do |artist| %>
+		<tr>
+		<td><a href=<%= artist.Url %>><%= artist.ListName %></a></td><td><%= artist.Genre %></td>
+		</tr>
+	<% end %>
+</table>

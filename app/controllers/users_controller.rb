@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
 	before_action :set_user, only: [:edit, :update, :show]
-	before_action :require_user, except: [:new, :show, :index]
 	before_action :require_same_user, only: [:edit, :update] #unless current_user.access_level == 'admin'
 	
 	def index
@@ -18,11 +17,11 @@ class UsersController < ApplicationController
   
   def create
     @user = User.create(user_params)
-    @user.user = current_user
     
     if @user.save 
-      flash[:success] = "Welcome to Client Tracker #{user.fname}!"
-      redirect_to users_path
+      session[:user_id] = @user.id
+      flash[:success] = "Welcome to Client Tracker #{@user.fname}!"
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -52,7 +51,7 @@ class UsersController < ApplicationController
     end
     
     def require_same_user
-      if current_user != @user.user
+      if current_user != @user
         flash[:danger] = "You can only edit your own profile."
         redirect_to user_path
       end

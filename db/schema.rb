@@ -11,7 +11,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150801013245) do
+ActiveRecord::Schema.define(version: 20150909231842) do
+
+  create_table "artists", force: :cascade do |t|
+    t.integer  "ArtistID"
+    t.string   "ListName"
+    t.string   "Url"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "EventID"
+    t.string   "EventName"
+    t.integer  "VenueID"
+    t.string   "VenueName"
+    t.integer  "CityID"
+    t.string   "CityName"
+    t.string   "State"
+    t.string   "CountryName"
+    t.string   "Region"
+    t.string   "PlayDate"
+    t.string   "Playtime"
+    t.string   "Url"
+    t.integer  "Venue_lat"
+    t.integer  "Venue_long"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "temp_artists", force: :cascade do |t|
+    t.integer  "ArtistID"
+    t.string   "ListName"
+    t.integer  "ArtstType"
+    t.integer  "MatchType"
+    t.string   "Genre"
+    t.string   "Url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "temp_events", force: :cascade do |t|
+    t.integer  "EventID"
+    t.string   "EventName"
+    t.integer  "VenueID"
+    t.string   "VenueName"
+    t.integer  "CityID"
+    t.string   "CityName"
+    t.string   "State"
+    t.string   "CountryName"
+    t.string   "Region"
+    t.string   "PlayDate"
+    t.string   "Playtime"
+    t.string   "Url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "fname"
