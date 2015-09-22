@@ -1,0 +1,11 @@
+<%= render 'shared/errors', obj: @artist %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @artist, url: {action: "search"}, html: {class: "nifty_form"} do |f| %>
+     	<%= f.label "Search for Artist Name:" %>
+     	<%= f.text_field :ListName %>
+    	<%= f.submit "Search" %>
+    <% end %>
+  </div>
+</div>

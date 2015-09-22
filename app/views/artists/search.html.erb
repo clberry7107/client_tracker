@@ -1,9 +1,16 @@
-<h1>These are your search results!</h1>
-<table>
-	<tr><th>Artist Name </th><th> Genre</th></tr>
+<h1>These are your search results for <u><%= @artist.ListName %></u></h1>
+<h2>Select the artist you are looking for.</h2>
+
+<%= form_tag("/add_artist", method: "get") do %>
 	<% @artists.each do |artist| %>
-		<tr>
-		<td><a href=<%= artist.Url %>><%= artist.ListName %></a></td><td><%= artist.Genre %></td>
-		</tr>
+		<div class="row well">
+			<div class="col-sm-1">
+				<%= radio_button_tag(:artist, artist.ArtistID)  %>
+			</div>
+			<div class="col-sm-2">
+				<a href= <%= artist.Url %>><%=  label_tag(:artist, "#{artist.ListName} - #{artist.Genre}")  %></a>
+			</div>
+		</div>
 	<% end %>
-</table>
+	<%= submit_tag("Select") %>
+<% end %>

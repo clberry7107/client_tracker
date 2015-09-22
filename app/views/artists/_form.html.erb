@@ -2,10 +2,17 @@
 
 <div class="row">
   <div class="well col-md-8 col-md-offset-2">
-    <%= form_for @artist, url: {action: "search"}, html: {class: "nifty_form"} do |f| %>
-     	<%= f.label "Search for Artist Name:" %>
-     	<%= f.text_field :ListName %>
-    	<%= f.submit "Search" %>
+   <%= form_for @artist do |f| %>
+ 	  <%= f.label "Name:" %><%= f.text_field :ListName%>
+   	<%= f.label "ArtistID:" %><%= f.text_field :ArtistID%>
+   	<%= f.label "Status" %>
+   	<%= f.select(:client_status) do %>
+   		<% [['Current', 'Current'], ['Former', 'Former'], ['Prospective', 'Prospective']].each do |s|%>
+   			<%= content_tag(:option, s.first, value: s.last) %>
+   		<% end %>
+   	<% end %>
+
+  	<%= f.submit('Update Status', class: "btn btn-success") %>
     <% end %>
   </div>
 </div>

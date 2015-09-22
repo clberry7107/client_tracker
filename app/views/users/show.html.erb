@@ -1,8 +1,18 @@
 <h1>This is the user show page for <%= @user.fname %></h1>
-<%= link_to "Search for Artist", search_artist_path %>
-<div class="calendar" id="calendar">
-  <h1>Calendar</h1>
-  <p>https://gist.github.com/jamesu/54116</p>
-  <p>this is the calendar i want to use</p>
-
+<div class="row">
+	<div class="col-md-4">
+		<%= link_to "Search for Artist", search_artist_path %>
+		<p>
+		<% @artists.each do |artist| %>
+			<div>
+				<%= link_to(artist.ListName, artist_path(artist)) %> - <%= artist.client_status %>
+			</div>
+		<% end %>
+		</p>
+		<div class="col-lg-8 offset-2">
+	  	<h1>Calendar</h1>
+	  	<p>https://gist.github.com/jamesu/54116</p>
+	  	<p>this is the calendar i want to use</p>
+		</div>
+	</div>
 </div>
