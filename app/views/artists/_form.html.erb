@@ -7,7 +7,7 @@
    	<%= f.label "ArtistID:" %><%= f.text_field :ArtistID%>
    	<%= f.label "Status" %>
    	<%= f.select(:client_status) do %>
-   		<% [['Current', 'Current'], ['Former', 'Former'], ['Prospective', 'Prospective']].each do |s|%>
+   		<% [[@artist.client_status, @artist.client_status],['Current', 'Current'], ['Former', 'Former'], ['Prospective', 'Prospective']].each do |s|%>
    			<%= content_tag(:option, s.first, value: s.last) %>
    		<% end %>
    	<% end %>

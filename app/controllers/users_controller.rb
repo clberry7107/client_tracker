@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   
   def show
     @artists = Artist.all
+    @events = Event.all.order(:PlayDate)
+    #@events.order(:PlayDate)
   end
   
   def new

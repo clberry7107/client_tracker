@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921234042) do
+ActiveRecord::Schema.define(version: 20150923205006) do
+
+  create_table "artist_events", force: :cascade do |t|
+    t.integer "artist_id"
+    t.integer "event_id"
+  end
 
   create_table "artists", force: :cascade do |t|
     t.integer  "ArtistID"

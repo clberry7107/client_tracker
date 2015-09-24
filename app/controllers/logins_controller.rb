@@ -10,6 +10,7 @@ class LoginsController < ApplicationController
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
 			flash[:success] = "Welcome back!"
+			update_cal
 			redirect_to user_path(user.id)
 		else
 			flash.now[:danger] = "Your email of password does not match"
