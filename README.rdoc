@@ -8,22 +8,4 @@ Dependencies:
 
 Notes:
 
-Generate new app
-Set up git and github
-enable bootstrap
-create route homepage
-build index view (homepage)
-create user model
-create user table
-build heder partial
-build menu partial
-build filter partial
-build client_list partial
-create artist model
-create event model
-create venue model
-create artist table
-create event table
-create venue table
-create join models
-create join tables
+create join table User_Temp_Artist

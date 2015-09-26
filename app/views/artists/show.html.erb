@@ -1,6 +1,7 @@
 <h1>This is the show page for <%= @artist.ListName %>.</h1>
 <p><%= link_to "Home Screen", user_path(current_user) %></p>
-<p><%= link_to "edit details", edit_artist_path %></p>
+<p><%= link_to "Edit Details", edit_artist_path %></p>
+<p><%= link_to "Delete Artist", artist_path, method: :delete %></p>
 <% @artist.events.each do |event| %>
 	<p><%= event.PlayDate %> - <%= event.VenueName %> - <%= event.Region %>	</p>
 <% end %>

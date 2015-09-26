@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
   
   resources :users, except: [:delete]
-  resources :artists
-
+  resources :artists 
 
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'

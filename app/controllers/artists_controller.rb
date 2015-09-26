@@ -43,7 +43,7 @@ class ArtistsController < ApplicationController
 		@artist = Artist.find_by(ArtistID: ta.ArtistID) || @artist = Artist.create({:ArtistID => ta.ArtistID, :ListName => ta.ListName, :Url => ta.Url})
 
 		redirect_to edit_artist_path(@artist)
-		update_cal
+		get_events(@artist)
 	end
 
 	def edit
@@ -66,6 +66,13 @@ class ArtistsController < ApplicationController
 
 	def destroy
 		#remove artist from artists table
+		artist = Artist.find(params[:id])	
+		artist.events.each do |e|
+			Event.delete(e)
+		end
+		artist.events.delete_all
+		artist.delete
+		redirect_to user_path(current_user)
 	end
 
 	private

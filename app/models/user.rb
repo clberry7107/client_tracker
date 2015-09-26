@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
 	has_secure_password
 
+	has_many :user_temp_artists, dependent: :destroy
+	has_many :temp_artists, through: :user_temp_artist
+
+
 	before_save {self.email = email.downcase}
   validates :fname, presence: true, length: {minimum: 3, maximum: 40}
   validates :lname, presence: true, length: {minimum: 3, maximum: 40}

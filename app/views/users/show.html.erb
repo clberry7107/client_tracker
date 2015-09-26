@@ -9,6 +9,7 @@
 			</div>
 		<% end %>
 		</p>
+		<p><%= link_to "Correlate Calenders" %>
 		<div >
 	  	<h1>Calendar</h1>
 	  	<p>https://gist.github.com/jamesu/54116</p>
@@ -16,9 +17,13 @@
 		</div>
 		<div >
 			<% @events.each do |event| %>
-			<p>
-				<%= event.PlayDate %> - <%= link_to(event.artists[0].ListName, artist_path(event.artists[0])) %> - <%= event.VenueName %> - <%= event.Region %>
-			</p>
+				<% if event.PlayDate != @date %>
+					<p> ----------------------------------</p>
+				<% end %>
+				<p>
+					<%= event.PlayDate %> - <%= link_to(event.artists[0].ListName, artist_path(event.artists[0])) %> - <%= event.VenueName %> - <%= event.Region %>
+				</p>	
+				<% @date = event.PlayDate %>			
 			<% end %>
 		</div>
 	</div>
