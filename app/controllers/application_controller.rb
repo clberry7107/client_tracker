@@ -67,8 +67,11 @@ class ApplicationController < ActionController::Base
       event.PlayDate = ne.attribute('PlayDate').to_s
       event.Playtime = ne.attribute('PlayTime').to_s
       event.Url = ne.attribute('Url').to_s
+      event.artist_name = artist.ListName
+      event.artist_id = artist.id
       event.save
-      ArtistEvent.create({:artist_id => artist.id, :event_id => event.id})
+
+      ArtistEvent.create({:artist => artist, :event => event})
     end
   end
 

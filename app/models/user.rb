@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	has_many :user_temp_artists, dependent: :destroy
-	has_many :temp_artists, through: :user_temp_artist
+	has_many :temp_artists, through: :user_temp_artists
 
 
 	before_save {self.email = email.downcase}

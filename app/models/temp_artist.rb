@@ -1,5 +1,5 @@
-class Temp_Artist < ActiveRecord::Base
-	has_many :user_temp_artist, dependent: :destroy
-	has_many :users, through: :user_temp_artists
+class TempArtist < ActiveRecord::Base
+	belongs_to :user_temp_artist
+	has_one :user, through: :user_temp_artists
 
 end

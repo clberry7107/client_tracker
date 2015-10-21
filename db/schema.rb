@@ -11,12 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926002741) do
+ActiveRecord::Schema.define(version: 20151021162534) do
 
   create_table "artist_events", force: :cascade do |t|
     t.integer "artist_id"
     t.integer "event_id"
   end
+
+  add_index "artist_events", ["artist_id"], name: "index_artist_events_on_artist_id"
+  add_index "artist_events", ["event_id"], name: "index_artist_events_on_event_id"
 
   create_table "artists", force: :cascade do |t|
     t.integer  "ArtistID"
@@ -44,6 +47,8 @@ ActiveRecord::Schema.define(version: 20150926002741) do
     t.integer  "Venue_long"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "artist_name"
+    t.integer  "artist_id"
   end
 
   create_table "temp_artists", force: :cascade do |t|

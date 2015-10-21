@@ -13,9 +13,9 @@ class ArtistsController < ApplicationController
 		# load results into temp_artists table
 
 		#Empty the temp_artist table
-		Temp_Artist.delete_all
+
 		#take user input and make it ready for pollstar api search string
-		@artist = Temp_Artist.new(artist_params)
+		@artist = TempArtist.new(artist_params)
 		@name = @artist.ListName.gsub " ", "%20"
 
 		this_uri = "http://data.pollstar.com/api/pollstar.asmx/Search?searchText=#{@name}#{ps_key}"
@@ -25,13 +25,15 @@ class ArtistsController < ApplicationController
 		doc = Nokogiri::XML(Net::HTTP.get(URI(this_uri)))
 		@all_artists = doc.xpath("//Artists//Artist")
 		
+		
 		#filter results by MatchType and send array list to view for display
 		@artists = Array.new
 		@all_artists.each do |a|
 			match_type = a.attribute('Matchtype')
 			if match_type.to_i < 3 
 				artistID = a.attribute('ID').to_s
-				@artists << Temp_Artist.create({:ListName => a.attribute('ListName').to_s, :ArtistID => artistID.to_i, :Genre => a.attribute('Genre'), :Url => a.attribute('Url')})
+				@artists << TempArtist.create({:ListName => a.attribute('ListName').to_s, :ArtistID => artistID.to_i, :Genre => a.attribute('Genre'), :Url => a.attribute('Url')})
+				UserTempArtist.create({:temp_artist_id => @artists.last.id, :user_id => current_user.id})
 			end
 		end
 	end
@@ -39,11 +41,12 @@ class ArtistsController < ApplicationController
 	def create
 		#When search result are confirmed,
 		# add selected artist to artists table
-		ta = Temp_Artist.find_by(ArtistID: params[:artist])
+		ta = TempArtist.find_by(ArtistID: params[:artist])
 		@artist = Artist.find_by(ArtistID: ta.ArtistID) || @artist = Artist.create({:ArtistID => ta.ArtistID, :ListName => ta.ListName, :Url => ta.Url})
 
 		redirect_to edit_artist_path(@artist)
 		get_events(@artist)
+		current_user.temp_artists.delete_all
 	end
 
 	def edit

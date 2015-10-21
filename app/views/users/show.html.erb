@@ -10,21 +10,24 @@
 		<% end %>
 		</p>
 		<p><%= link_to "Correlate Calenders" %>
-		<div >
+		<div>
 	  	<h1>Calendar</h1>
 	  	<p>https://gist.github.com/jamesu/54116</p>
 	  	<p>this is the calendar i want to use</p>
 		</div>
 		<div >
-			<% @events.each do |event| %>
-				<% if event.PlayDate != @date %>
-					<p> ----------------------------------</p>
+			<%= @date %>
+			<%= @last_date %>
+				<% @events.each do |event| %>
+					<% if event.PlayDate != @date %>
+						<p> ----------------------------------</p>
+						<p><%= @date %></P>
+					<% end %>
+					<p>
+						<%= link_to(event.artist_name, artist_path(event.artist_id)) %> - <%= event.VenueName %> - <%= event.Region %>
+					</p>	
+					<% @date = event.PlayDate  %>			
 				<% end %>
-				<p>
-					<%= event.PlayDate %> - <%= link_to(event.artists[0].ListName, artist_path(event.artists[0])) %> - <%= event.VenueName %> - <%= event.Region %>
-				</p>	
-				<% @date = event.PlayDate %>			
-			<% end %>
 		</div>
 	</div>
 </div>
