@@ -54,25 +54,26 @@ class ApplicationController < ActionController::Base
     all_artist_events = doc.xpath("//ArtistInfo//Events/Event")  
 
     all_artist_events.each do |ne|
-      event = Event.new
-      event.EventID = ne.attribute('EventID').to_s
-      event.EventName = ne.attribute('EventName').to_s
-      event.VenueID = ne.attribute('VenueID').to_s
-      event.VenueName = ne.attribute('VenueName').to_s
-      event.CityID = ne.attribute('CityID').to_s
-      event.CityName = ne.attribute('CityName').to_s
-      event.State = ne.attribute('State').to_s
-      event.CountryName = ne.attribute('CountryName').to_s
-      event.Region = ne.attribute('Region').to_s
-      event.PlayDate = ne.attribute('PlayDate').to_s
-      event.Playtime = ne.attribute('PlayTime').to_s
-      event.Url = ne.attribute('Url').to_s
-      event.artist_name = artist.ListName
-      event.artist_id = artist.id
-      event.save
+      if !Event.find_by(EventID: ne.attribute('EventID').to_s)
+        event = Event.new
+        event.EventID = ne.attribute('EventID').to_s
+        event.EventName = ne.attribute('EventName').to_s
+        event.VenueID = ne.attribute('VenueID').to_s
+        event.VenueName = ne.attribute('VenueName').to_s
+        event.CityID = ne.attribute('CityID').to_s
+        event.CityName = ne.attribute('CityName').to_s
+        event.State = ne.attribute('State').to_s
+        event.CountryName = ne.attribute('CountryName').to_s
+        event.Region = ne.attribute('Region').to_s
+        event.PlayDate = ne.attribute('PlayDate').to_s
+        event.Playtime = ne.attribute('PlayTime').to_s
+        event.Url = ne.attribute('Url').to_s
+        event.artist_name = artist.ListName
+        event.artist_id = artist.id
+        event.save
 
-      ArtistEvent.create({:artist => artist, :event => event})
+        ArtistEvent.create({:artist => artist, :event => event})
+      end
     end
   end
-
 end

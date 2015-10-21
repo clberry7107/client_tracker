@@ -24,7 +24,7 @@ class ArtistsController < ApplicationController
 		#query pollstar and save results as xml object
 		doc = Nokogiri::XML(Net::HTTP.get(URI(this_uri)))
 		@all_artists = doc.xpath("//Artists//Artist")
-		
+
 		
 		#filter results by MatchType and send array list to view for display
 		@artists = Array.new
@@ -40,10 +40,12 @@ class ArtistsController < ApplicationController
 
 	def create
 		#When search result are confirmed,
-		# add selected artist to artists table
 		ta = TempArtist.find_by(ArtistID: params[:artist])
-		@artist = Artist.find_by(ArtistID: ta.ArtistID) || @artist = Artist.create({:ArtistID => ta.ArtistID, :ListName => ta.ListName, :Url => ta.Url})
 
+		#check if search artist exists in Artist table
+		# add selected artist to artists table
+		@artist = Artist.find_by(ArtistID: ta.ArtistID) || @artist = Artist.create({:ArtistID => ta.ArtistID, :ListName => ta.ListName, :Url => ta.Url})
+			
 		redirect_to edit_artist_path(@artist)
 		get_events(@artist)
 		current_user.temp_artists.delete_all

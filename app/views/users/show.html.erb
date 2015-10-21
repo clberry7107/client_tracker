@@ -15,6 +15,7 @@
 	  	<p>https://gist.github.com/jamesu/54116</p>
 	  	<p>this is the calendar i want to use</p>
 		</div>
+		<% if @events != nil %>
 		<div >
 			<%= @date %>
 			<%= @last_date %>
@@ -29,5 +30,6 @@
 					<% @date = event.PlayDate  %>			
 				<% end %>
 		</div>
+		<% end %>
 	</div>
 </div>
