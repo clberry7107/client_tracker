@@ -115,3 +115,18 @@ span.picture{
   margin-bottom: 10px;
 }
 
+#side_bar{
+  width: 250px;
+  background-color: lightgray;
+  float: left;
+  margin:5;
+
+}
+
+#main_body{
+  width: 500px;
+  float: left;
+  margin: 5px;  
+  padding-left: 5px;
+  border-left: 2px solid black;
+}
