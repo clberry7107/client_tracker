@@ -1,0 +1,21 @@
+<h1>this is the show page for <%= @city.Region %></h1>
+<div class="row">
+	<div id="side_bar">		
+		<p><%= link_to "Home Screen", user_path(current_user) %></p>
+		<p><%= link_to "City List", cities_path %>
+	</div>
+	<div id="main_body">
+	<% @events.each do |event| %>
+		<% if event.PlayDate != @date %>
+			<% @date = event.PlayDate %>
+			<hr>
+			<p><%= @date %></P>
+		<% end %>
+		<p>
+			<%= link_to(event.artist_name, artist_path(event.artist)) %> - <%= event.VenueName %> 
+		</p>	
+		<% @date = event.PlayDate  %>			
+	<% end %>
+
+	</div>
+</div>

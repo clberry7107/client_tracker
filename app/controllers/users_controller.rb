@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :set_user, only: [:edit, :update, :show, :correlate]
+	before_action :set_user, only: [:edit, :update, :show]
 	before_action :require_same_user, only: [:edit, :update] #unless current_user.access_level == 'admin'
 	
 	def index
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
   
   def show
-    @artists = Artist.all
+    @artists = Artist.all.order(:ListName)
     @events = Event.all.order(:PlayDate)
     @date = Date.today
     if Event.last then (@last_date = @events.last.PlayDate || Date.today) end
@@ -43,14 +43,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def correlate
-    @artists = Artist.all
-    #@events = Event.all.order(:PlayDate)
-    @events = nil
-    @date = Date.today
-    if Event.last then (@last_date = Event.last.PlayDate || Date.today) end
-    render :show
-  end
   
   private
   

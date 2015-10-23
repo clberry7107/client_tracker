@@ -2,15 +2,16 @@
 <div class="row">
 	<div id="side_bar">
 		<h1>Artists</h1>
-		<%= link_to "Search for Artist", search_artist_path %>
+		<%= link_to "Search for Artist", search_artist_path %><br/>
+		<%= link_to("City List", cities_path) %>
+		<hr>
 		<p>
 		<% @artists.each do |artist| %>
 			<div>
-				<%= link_to(artist.ListName, artist_path(artist)) %> - <%= artist.client_status %>
+				<p><%= link_to(artist.ListName, artist_path(artist)) %></p>
 			</div>
 		<% end %>
 		</p>
-		<p><%= link_to "Correlate Calenders" %></p>
 	</div>
 	<div id="main_body">
 		<div>
@@ -20,8 +21,8 @@
 		</div>
 		<% if @events != nil %>
 		<div>
-			<%= @date %>
-			<%= @last_date %>
+			<! %= @date %>
+			<! %= @last_date %>
 				<% @events.each do |event| %>
 					<% if event.PlayDate != @date %>
 						<% @date = event.PlayDate %>
@@ -29,7 +30,7 @@
 						<p><%= @date %></P>
 					<% end %>
 					<p>
-						<%= link_to(event.artist_name, artist_path(event.artist_id)) %> - <%= event.VenueName %> - <%= event.Region %>
+						<%= link_to(event.artist_name, artist_path(event.artist)) %> - <%= event.VenueName %> - <%= link_to(event.Region, city_path(event.city)) %>
 					</p>	
 					<% @date = event.PlayDate  %>			
 				<% end %>

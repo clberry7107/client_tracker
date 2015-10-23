@@ -1,0 +1,23 @@
+<h1>City Index</h1>
+<div class="row">
+	<div id="side_bar">
+		<p><%= link_to "Home Screen", user_path(current_user) %></p>
+	</div>
+	<div id="main_body">
+		<% @cities.each do |city| %>
+			<% if city.State != @state %>
+				</ul>
+				<hr>
+				<ul><%= city.State %>
+			<% end %>
+			<li><%= link_to(city.CityName, city_path(city)) %> 
+				
+					<%= city.CountryName %>
+				
+			</li>
+
+			<% @state = city.State %>
+		<% end %>
+		</ul>
+	</div>
+</div>
