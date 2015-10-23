@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021162534) do
+ActiveRecord::Schema.define(version: 20151023152921) do
 
   create_table "artist_events", force: :cascade do |t|
     t.integer "artist_id"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 20151021162534) do
     t.string   "ListName"
     t.string   "Url"
     t.string   "client_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.integer  "CityID"
+    t.string   "CityName"
+    t.string   "State"
+    t.string   "Region"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "city_tables", force: :cascade do |t|
+    t.integer  "CityId"
+    t.string   "CityName"
+    t.string   "State"
+    t.string   "Region"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
