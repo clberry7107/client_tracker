@@ -75,8 +75,10 @@ class ApplicationController < ActionController::Base
       event.Url = ne.attribute('Url').to_s
       event.artist_name = artist.ListName
       event.artist_id = artist.id
-      event.save
+      
       city = City.find_by CityID: city.CityID unless city.save
+      event.city_id = city.id
+      event.save
 
       ArtistEvent.create({:artist => artist, :event => event})
       CityEvent.create({:city => city, :event => event})
