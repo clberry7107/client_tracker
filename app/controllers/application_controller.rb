@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   @@last_cal_update = Date.yesterday
 
   helper_method :current_user, :logged_in?, :require_user, :ps_key, :update_cal, :last_updated
-  helper_method :get_events
+  helper_method :get_events, :get_address
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
       city.CountryName = ne.attribute('CountryName').to_s
       event.Region = ne.attribute('Region').to_s
       city.Region = ne.attribute('Region').to_s
-      event.PlayDate = ne.attribute('PlayDate').to_s
+      event.PlayDate = Date.parse(ne.attribute('PlayDate').to_s.gsub(/, */, '-'))
       event.Playtime = ne.attribute('PlayTime').to_s
       event.Url = ne.attribute('Url').to_s
       event.artist_name = artist.ListName
@@ -83,5 +83,18 @@ class ApplicationController < ActionController::Base
       ArtistEvent.create({:artist => artist, :event => event})
       CityEvent.create({:city => city, :event => event})
     end
+  end
+
+  def get_address(event)
+    this_uri = "http://data.pollstar.com/api/pollstar.asmx/VenueEvents?venueID=#{event.VenueID}&startDate=#{event.PlayDate}&dayCount=0&pageSize=0&apiKey=#{ps_key}"
+
+    doc = Nokogiri::XML(Net::HTTP.get(URI(this_uri)))
+    venue = doc.xpath("//VenueInfo")
+    address =  Address.new(event.id) 
+    address.address1 = venue.attribute('Address1').to_s unless venue == nil || "missing data"
+    address.address2 = venue.attribute('Address2').to_s unless venue == nil || "missing data"
+    address.zip = venue.attribute('Zip').to_s unless venue == nil || "missing data"
+
+    return address
   end
 end

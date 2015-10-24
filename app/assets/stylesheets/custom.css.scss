@@ -65,8 +65,16 @@ h2 {
 }
 
 .left {
+  font-size: 1.5em;
   text-align: left;
   letter-spacing: .5px;
+}
+
+.right {
+  font-size: 1.5em;
+  text-align: right;
+  letter-spacing: .5px;
+  text-decoration: em;
 }
 
 .footer{
@@ -125,9 +133,13 @@ span.picture{
 }
 
 #main_body{
-  width: 600px;
+  width: 700px;
   float: left;
   margin: 5px;  
   padding-left: 5px;
   border-left: 2px solid black;
+}
+
+td {
+  padding: 5px;
 }

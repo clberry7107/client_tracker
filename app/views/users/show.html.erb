@@ -20,21 +20,28 @@
 	  	<p>this is the calendar i want to use</p>
 		</div>
 		<% if @events != nil %>
-		<div>
-			<! %= @date %>
-			<! %= @last_date %>
-				<% @events.each do |event| %>
-					<% if event.PlayDate != @date %>
-						<% @date = event.PlayDate %>
-						<hr>
-						<p><%= @date %></P>
+			<div>
+				<! %= @date %>
+				<! %= @last_date %>
+				<table>
+					<% @events.each do |event| %>
+						<% if event.PlayDate != @date %>
+							<% @date = event.PlayDate %>							
+							
+							<tr>
+								<td><%= @date.to_date.month %>/<%= @date.to_date.mday %></td>
+							</tr>
+						<% end %>
+						<tr>
+							<td></td>
+							<td><%= link_to(event.artist_name, artist_path(event.artist)) %></td>
+							<td><%= link_to(event.VenueName, event_path(event)) %></td>
+							<td><%= link_to(event.Region, city_path(event.city)) %></td>							
+						</tr>
+						<% @date = event.PlayDate  %>			
 					<% end %>
-					<p>
-						<%= link_to(event.artist_name, artist_path(event.artist)) %> - <%= event.VenueName %> - <%= link_to(event.Region, city_path(event.city)) %>
-					</p>	
-					<% @date = event.PlayDate  %>			
-				<% end %>
-		</div>
+				</table>
+			</div>
 		<% end %>
 	</div>
 </div>

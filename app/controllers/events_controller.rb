@@ -22,8 +22,13 @@ end
 
 def show
 	#Shows artist info and list of events
-	@event = Event.find[params :id]
-end
+	@event = Event.find(params[:id])
+	@address = get_address(@event)
+	other_events = Event.where(:PlayDate => @event.PlayDate.to_date - 5..@event.PlayDate.to_date + 5)
+
+	@other_events = other_events.reject {|event| event.Region != @event.Region || event == @event}
+	
+	end
 
 
 def update
@@ -34,7 +39,7 @@ end
 
 def destroy
 	#remove all selected artist events from events table
-	@event = Event.find[params :id]
+	@event = Event.find(params[:id])
 end
 
 
