@@ -86,14 +86,14 @@ class ApplicationController < ActionController::Base
   end
 
   def get_address(event)
-    this_uri = "http://data.pollstar.com/api/pollstar.asmx/VenueEvents?venueID=#{event.VenueID}&startDate=#{event.PlayDate}&dayCount=0&pageSize=0&apiKey=#{ps_key}"
+    this_uri = "http://data.pollstar.com/api/pollstar.asmx/VenueEvents?venueID=#{event.VenueID}&startDate=#{Time.now.strftime("%m/%d/%Y")}&dayCount=0&page=0&pageSize=0#{ps_key}"
 
     doc = Nokogiri::XML(Net::HTTP.get(URI(this_uri)))
     venue = doc.xpath("//VenueInfo")
     address =  Address.new(event.id) 
-    address.address1 = venue.attribute('Address1').to_s unless venue == nil || "missing data"
-    address.address2 = venue.attribute('Address2').to_s unless venue == nil || "missing data"
-    address.zip = venue.attribute('Zip').to_s unless venue == nil || "missing data"
+    address.address1 = venue.attribute('Address1')
+    address.address2 = venue.attribute('Address2')
+    address.zip = venue.attribute('Zip')
 
     return address
   end
