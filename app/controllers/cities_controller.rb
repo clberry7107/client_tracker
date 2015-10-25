@@ -2,8 +2,12 @@ class CitiesController < ApplicationController
 
 
 	def index
+		if City.count == 0
+			redirect_to user_path(current_user)
+		end
+		
 		@cities = City.all.order(:State)
-		@state = @cities.first.State
+		@state = @cities.first.State unless @cities.count == 0
 	end
 
 	def new
@@ -12,7 +16,7 @@ class CitiesController < ApplicationController
 
 	def show
 		@city = City.find(params[:id])
-		@events = @city.events.order(:PlayDate)
+		@events = @city.events.order(:PlayDate) 
 		@date = Date.today
 	end
 

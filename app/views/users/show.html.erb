@@ -1,4 +1,4 @@
-<h1>This is the user show page for <%= @user.fname %></h1>
+<h1>Calendar for all tracked Artists</h1>
 <div class="row">
 	<div id="side_bar">
 		<h1>Artists</h1>
@@ -14,34 +14,6 @@
 		</p>
 	</div>
 	<div id="main_body">
-		<div>
-	  	<h1>Calendar</h1>
-	  	<p>https://gist.github.com/jamesu/54116</p>
-	  	<p>this is the calendar i want to use</p>
-		</div>
-		<% if @events != nil %>
-			<div>
-				<! %= @date %>
-				<! %= @last_date %>
-				<table>
-					<% @events.each do |event| %>
-						<% if event.PlayDate != @date %>
-							<% @date = event.PlayDate %>							
-							
-							<tr>
-								<td><%= @date.to_date.month %>/<%= @date.to_date.mday %></td>
-							</tr>
-						<% end %>
-						<tr>
-							<td></td>
-							<td><%= link_to(event.artist_name, artist_path(event.artist)) %></td>
-							<td><%= link_to(event.VenueName, event_path(event)) %></td>
-							<td><%= link_to(event.Region, city_path(event.city)) %></td>							
-						</tr>
-						<% @date = event.PlayDate  %>			
-					<% end %>
-				</table>
-			</div>
-		<% end %>
+		<%= render 'shared/event_list', events: @events %>
 	</div>
 </div>

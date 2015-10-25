@@ -1,7 +1,8 @@
 $navbar-default-bg: #B0B0B0;
 $light-orange: #FFCC66;
 $navbar-default-color: #1C3F79;
-
+$page-background: #EAEEF3;
+$link-color: #1C3F79;
 
 
 @import "bootstrap-sprockets";
@@ -26,6 +27,7 @@ $navbar-default-color: #1C3F79;
 
 body {
   padding-top: 80px;
+  background-color: $page-background;
 }
 
 .nav_item {
@@ -62,6 +64,15 @@ h2 {
   text-align: center;
   font-weight: normal;
   color: #777;
+}
+
+h3 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: normal;
+  color: #777;
+  text-decoration: underline;
 }
 
 .left {
@@ -142,4 +153,18 @@ span.picture{
 
 td {
   padding: 5px;
+}
+th {
+  colspan: 4;
+  background-color: lightgray;
+
+}
+#new_date{
+  border-top-style: 1px solid black;
+}
+
+a{
+  text-color: $link-color;
+  text-decoration: strong;
+  text-size: 1.1em;
 }

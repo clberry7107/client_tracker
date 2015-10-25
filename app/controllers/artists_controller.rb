@@ -73,6 +73,7 @@ class ArtistsController < ApplicationController
 		#remove artist from artists table
 		artist = Artist.find(params[:id])	
 		artist.events.each do |e|
+			e.city_events.delete_all
 			Event.delete(e)
 		end
 		artist.events.delete_all

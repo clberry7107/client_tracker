@@ -1,4 +1,4 @@
-<h1>This is the show page for <%= @artist.ListName %>.</h1>
+<h1>Tour dates for <%= @artist.ListName %>.</h1>
 <div class="row">
 	<div id="side_bar">
 		<p><%= link_to "Home Screen", user_path(current_user) %></p>
@@ -8,8 +8,6 @@
 		<p><%= link_to "City List", cities_path %></p>
 	</div>
 	<div id="main_body">
-		<% @artist.events.each do |event| %>
-			<p><%= event.PlayDate %> - <%= event.VenueName %> - <%= link_to(event.Region, city_path(event.city)) %>	</p>
-		<% end %>
+		<%= render 'shared/event_list', events: @artist.events %>
 	</div>
 </div>

@@ -10,4 +10,5 @@ class Event < ActiveRecord::Base
 	def city
 		City.find(city_id)
 	end
+
 end

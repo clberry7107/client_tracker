@@ -1,0 +1,29 @@
+<! Requires 'events' >
+<% if events.count != 0 %>
+	<div>
+		<div>
+			<h1><%= @year = events.first.PlayDate.to_date.year %></h1>
+		</div>				
+		<table>
+			<% events.each do |event| %>
+				<% if event.PlayDate.to_date != @date %>							
+					<% @date = event.PlayDate.to_date %>	
+				<% if @date.year != @year %>
+					</table>
+					<h1><%= @year = @date.year %></h1>
+					<table>
+				<% end %>
+				<tr>
+					<th colspan="4"><%= @date.month %>/<%= @date.mday %></th>
+				</tr>
+				<% end %>
+				<tr>
+					<td></td>
+					<td><%= link_to(event.artist_name, artist_path(event.artist)) %></td>
+					<td><%= link_to(event.VenueName, event_path(event)) %></td>
+					<td><%= link_to(event.Region, city_path(event.city)) %></td>					
+				</tr>	
+			<% end %>
+		</table>
+	</div>
+<% end %>

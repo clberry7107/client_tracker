@@ -1,4 +1,4 @@
-<h1>Show page for <%= @event.artist_name %> in <%= @event.Region %></h1>
+<h1><%= @event.artist_name %> in <%= @event.Region %></h1>
 <div class="row">
 	<div id="side_bar">
 		<p><%= link_to "Home Screen", user_path(current_user) %></p>
@@ -41,30 +41,11 @@
 				</tr>
 			</table>
 		</div>
-		<hr>
-		<% if @other_events != nil %>
-		<div>
-			<h2 class="left">Nearby Events</h2>
-			<! %= @date %>
-			<! %= @last_date %>
-			<table>
-				<% @other_events.each do |event| %>
-					<% if event.PlayDate != @date %>
-						<% @date = event.PlayDate %>							
-		 				<tr>
-							<td><%= @date.to_date.month %>/<%= @date.to_date.mday %></td>
-						</tr>
-		 			<% end %>
-					<tr>
-						<td></td>
-						<td><%= link_to(event.artist_name, artist_path(event.artist)) %></td>
-						<td><%= link_to(event.VenueName, event_path(event)) %></td>
-						<td><%= link_to(event.Region, city_path(event.city)) %></td>							
-					</tr>
-					<% @date = event.PlayDate  %>			
-				<% end %>
-			</table>
+		<div>	
+			<% if @other_events.count > 0 %>	
+				<h3>Near by events</h3>
+			<% end %>
 		</div>
-		<% end %>
+		<%= render 'shared/event_list', events: @other_events %>
 	</div>
 </div>
