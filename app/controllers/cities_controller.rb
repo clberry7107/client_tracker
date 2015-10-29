@@ -16,8 +16,7 @@ class CitiesController < ApplicationController
 
 	def show
 		@city = City.find(params[:id])
-		@events = @city.events.order(:PlayDate) 
-		@date = Date.today
+		@events = @city.events.order(:PlayDate)
 	end
 
 	def create

@@ -1,3 +1,4 @@
+<%= render 'shared/errors', obj: @artist %>
 <h1>These are your search results for <u><%= @artist.ListName %></u></h1>
 <h2>Select the artist you are looking for.</h2>
 
@@ -5,14 +6,15 @@
 	<% @artists.each do |artist| %>
 		<div class="row well">
 			<div class="col-sm-1">
-				<%= radio_button_tag(:artist, artist.ArtistID)  %>
+				<%= radio_button_tag(:selected_artist, artist.ArtistID)  %>
 			</div>
 			<div class="col-sm-2">
-				<a href= <%= artist.Url %>><%=  label_tag(:artist, "#{artist.ListName} - #{artist.Genre}")  %></a>
+				<a href= <%= artist.Url %>><%=  label_tag(:selected_artist, "#{artist.ListName} - #{artist.Genre}")  %></a>
 			</div>
 		</div>
-	<%= hidden_field_tag :user , current_user %>
-
 	<% end %>
+	<%= hidden_field_tag :user, current_user.id %>
+	<%= hidden_field_tag :type, 'Redirect' %>
+	<%= hidden_field_tag :artist, @artist.ListName %>
 	<%= submit_tag("Select") %>
 <% end %>

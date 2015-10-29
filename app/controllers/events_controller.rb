@@ -27,7 +27,7 @@ def show
 	other_events = Event.where(:PlayDate => @event.PlayDate.to_date - 5..@event.PlayDate.to_date + 5)
 
 	@other_events = other_events.reject {|event| event.Region != @event.Region || event == @event}
-	
+	@other_events.sort_by(&:PlayDate)
 	end
 
 
