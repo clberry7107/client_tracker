@@ -53,6 +53,8 @@ class ArtistsController < ApplicationController
 			
 		redirect_to edit_artist_path(@artist)
 		get_events(@artist)
+		artists = current_user.temp_artists
+		artists.each{|a| TempArtist.find(a).delete}
 		current_user.temp_artists.delete_all
 	end
 
