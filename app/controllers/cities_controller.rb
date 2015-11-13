@@ -1,6 +1,8 @@
 class CitiesController < ApplicationController
 
-
+	before_action :require_user
+	
+	
 	def index
 		if City.count == 0
 			redirect_to user_path(current_user)

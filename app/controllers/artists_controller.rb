@@ -1,7 +1,8 @@
 class ArtistsController < ApplicationController
 	before_action :valid_selection?, only: [:create]
 	before_action :valid_artist_name?, only: [:search]
-
+	before_action :require_user
+	
 	def index
 		#Show all saved artist info
 	end
