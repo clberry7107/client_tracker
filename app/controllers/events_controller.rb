@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+before_action :require_user
+
 def index
 	#Show all saved Events info
 	@events = Events.all

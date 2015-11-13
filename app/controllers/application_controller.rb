@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    
   end
   
   def logged_in?
@@ -17,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def require_user
     if !logged_in?
-      flash[:danger] = "You must be logged in to perform that action"
+      flash[:danger] = "Something went wrong with you log in. Please sign in."
       redirect_to root_path
     end
   end

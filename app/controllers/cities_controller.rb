@@ -1,6 +1,8 @@
 class CitiesController < ApplicationController
 
-
+	before_action :require_user
+	
+	
 	def index
 		#show cities table in state order
 		if City.count == 0

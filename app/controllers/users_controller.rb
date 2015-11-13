@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-
-	before_action :set_user, only: [:edit, :update, :show]
-	before_action :require_same_user, only: [:edit, :update] #unless current_user.access_level == 'admin'
+  
+  before_action :require_user, only: [:show, :update]
+	before_action :set_user, only: [:edit, :update]
+	before_action :require_same_user, only: [:edit, :update] 
 	
 	def index
     @users = User.paginate(page: params[:page], per_page: 10)
@@ -10,6 +11,10 @@ class UsersController < ApplicationController
   def show
     @artists = Artist.all.order(:ListName)
     @events = Event.all.order(:PlayDate)
+<<<<<<< HEAD
+=======
+    if Event.last then (@last_date = @events.last.PlayDate || Date.today) end
+>>>>>>> no_user
   end
   
   def new
@@ -59,5 +64,6 @@ class UsersController < ApplicationController
         redirect_to user_path
       end
     end
+
 
 end
