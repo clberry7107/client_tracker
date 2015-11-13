@@ -11,10 +11,8 @@ class UsersController < ApplicationController
   def show
     @artists = Artist.all.order(:ListName)
     @events = Event.all.order(:PlayDate)
-<<<<<<< HEAD
-=======
     if Event.last then (@last_date = @events.last.PlayDate || Date.today) end
->>>>>>> no_user
+
   end
   
   def new
