@@ -16,6 +16,7 @@ class ArtistsController < ApplicationController
 		@artists = Array.new
 
 		#take user input and make it ready for pollstar api search string
+		#MOVE THIS TO APPLICATION_CONTROLLER
 		if params[:type] == "Search" 
 			@artist = TempArtist.new(:ListName => params[:artist])
 			@name = @artist.ListName.gsub " ", "%20"
@@ -90,21 +91,23 @@ class ArtistsController < ApplicationController
 
 	private
 
-	def artist_params
-		params.require(:artist).permit(:ListName, :ArtistID, :Url, :client_status)
-	end
-
-	def valid_artist_name?
-		if params[:artist].empty?
-			flash[:danger] = "Please enter an artist name"
-			redirect_to search_artist_path
+		def artist_params
+			params.require(:artist).permit(:ListName, :ArtistID, :Url, :client_status)
 		end
-	end
-
-	def valid_selection?
-		if !params[:selected_artist] 
-			flash[:danger] = "Please select an artist"
-			redirect_to search_path(params)
+	
+		#Ensures user has entered name in search field
+		def valid_artist_name?
+			if params[:artist].empty?
+				flash[:danger] = "Please enter an artist name"
+				redirect_to search_artist_path
+			end
 		end
-	end
+	
+		#Ensures user has selected artist from search results
+		def valid_selection?
+			if !params[:selected_artist] 
+				flash[:danger] = "Please select an artist"
+				redirect_to search_path(params)
+			end
+		end
 end

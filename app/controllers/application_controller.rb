@@ -22,18 +22,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Pollstar.com API key
   def ps_key
     "&apiKey=22300-7812380"
   end
 
+  #Test when the database was last updated
   def updated_today?
     Date.today == @@last_cal_update
   end
-
+  
   def last_updated
     @@last_cal_update
   end
 
+  #Clears and updates Event table
   def update_cal
     if !updated_today?
       Event.delete_all
@@ -46,6 +49,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Fetch artist events from Pollstar.com API
   def get_events(artist)
     this_uri = "http://data.pollstar.com/api/pollstar.asmx/ArtistEvents?artistID=#{artist.ArtistID}&startDate=#{Time.now.strftime("%m/%d/%Y")}&dayCount=0&page=0&pageSize=0#{ps_key}"
     this_uri.gsub! " ", ""
@@ -85,6 +89,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Fetch venue address form Pollstar.com API
   def get_address(event)
     this_uri = "http://data.pollstar.com/api/pollstar.asmx/VenueEvents?venueID=#{event.VenueID}&startDate=#{Time.now.strftime("%m/%d/%Y")}&dayCount=0&page=0&pageSize=0#{ps_key}"
 

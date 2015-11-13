@@ -42,8 +42,10 @@
 			</table>
 		</div>
 		<div>	
-			<% if @other_events.count > 0 %>	
-				<h3>Near by events</h3>
+			<% if @other_events.count > 1 %>	
+				<h3>There are <%= @other_events.count %> near by events</h3>
+			<% elsif @other_events.count > 0 %>
+				<h3>There is <%= @other_events.count %> near by event</h3>
 			<% end %>
 		</div>
 		<%= render 'shared/event_list', events: @other_events %>

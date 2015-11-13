@@ -10,8 +10,6 @@ class UsersController < ApplicationController
   def show
     @artists = Artist.all.order(:ListName)
     @events = Event.all.order(:PlayDate)
-    #@date = Date.today
-    if Event.last then (@last_date = @events.last.PlayDate || Date.today) end
   end
   
   def new
@@ -26,6 +24,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to Client Tracker #{@user.fname}!"
       redirect_to user_path(current_user)
     else
+      flash[:warning] = "Something went wrong, try again."
       render :new
     end
   end

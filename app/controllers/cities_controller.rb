@@ -2,6 +2,7 @@ class CitiesController < ApplicationController
 
 
 	def index
+		#show cities table in state order
 		if City.count == 0
 			redirect_to user_path(current_user)
 		end

@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, 
                     uniqueness: {case_sensitive: false}, 
                     format: {with: VALID_EMAIL_REGEX}
-
+    #NEED TO ADD EMAIL CONFIRMATION BY ACTION MAILER
 
 end
