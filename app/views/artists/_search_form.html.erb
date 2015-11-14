@@ -3,7 +3,7 @@
 <div class="row">
   <div class="well col-md-8 col-md-offset-2">
     <%= form_tag("/search", method: "get") do %>
-     	<%= label_tag "Search for Artist Name:" %>
+     	<%= label_tag "Name of Artist to search for" %>
      	<%= text_field_tag :artist %>
      	<%= hidden_field_tag :user , current_user.id %>
      	<%= hidden_field_tag :type, 'Search' %>

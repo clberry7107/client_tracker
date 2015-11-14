@@ -9,7 +9,6 @@ $link-color: #1C3F79;
 @import "bootstrap";
 
 #logo {
-   margin: 10px;
    float: left;
    font-size: 2em;
    color: #fff;
@@ -17,7 +16,7 @@ $link-color: #1C3F79;
    letter-spacing: -1px;
    padding-top: 9px;
    font-weight: bold;
-   background-color: #1C3F79
+   background-color: #1C3F79;
 }
 
 #logo:hover {
@@ -26,16 +25,16 @@ $link-color: #1C3F79;
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 130px;
   background-color: $page-background;
   font-size: 2em;
 }
 
 .nav_item {
+ margin: 10px;
  margin-left: 25px;
  float: left;
- margin-top: 10px;
-
+ padding-top: 9px;
 }
 
 .nav_ul_item {

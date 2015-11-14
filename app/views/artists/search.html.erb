@@ -1,7 +1,7 @@
 <%= render 'shared/errors', obj: @artist %>
 <h1>These are your search results for <u><%= @artist.ListName %></u></h1>
-<h2>Select the artist you are looking for.</h2>
-
+<h3>Select the artist you are looking for.</h3>
+<h2>Click artist name to visit pollstar page.</h2>
 <%= form_tag("/add_artist", method: "get") do %>
 	<% @artists.each do |artist| %>
 		<div class="row well">

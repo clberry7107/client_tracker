@@ -1,19 +1,21 @@
   <header class="navbar navbar-fixed-top navbar-default">
     <div class="container">
-      <a href="http://www.8thdaysound.com">
-        <%= image_tag("logo.jpg", width: 100, height: 60, margin: 10, class: "nav_item") %>
-      </a>
-      <%= link_to "Client Tracker", root_path, class: "btn btn-lg btn-success", id: "logo" %>
+      <div class="nav_item">
+        <a href="http://www.8thdaysound.com">
+          <%= image_tag("logo.jpg", width: 180, height: 105) %>
+        </a>
+      </div>
+      <div class="nav_item">
+        <%= link_to "Client Tracker", root_path, class: "btn btn-lg btn-success", id: "logo" %>
+      </div>
       <% if logged_in? %>
         <div class="nav_item">
-          <%= link_to "Log out", logout_path, class: "btn btn-default btn-success" %>
-        </div>
-        <div class="nav_item">
-          <%= link_to "Profile", edit_user_path(current_user), class: "btn btn-default btn-success" %>
+          <%= link_to "Log out", logout_path, class: "btn btn-lg btn-success" %>
+          <%= link_to "Profile", edit_user_path(current_user), class: "btn btn-lg btn-success" %>
         </div>
       <% else %>
         <div class="nav_item">
-          <%= link_to "Log in", login_path, class: "btn btn-default btn-success" %>
+          <%= link_to "Log in", login_path, class: "btn btn-lg btn-success" %>
         </div>
       <% end %>
     </div>

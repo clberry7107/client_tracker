@@ -13,7 +13,7 @@ class LoginsController < ApplicationController
 			update_cal
 			redirect_to user_path(user.id)
 		else
-			flash.now[:danger] = "Your email of password does not match"
+			flash.now[:danger] = "Your email and password do not match our records"
 			render 'new'
 		end
 	end
