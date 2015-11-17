@@ -151,8 +151,14 @@ span.picture{
   border-left: 2px solid black;
 }
 
+table{
+  border-right: 1px solid #d2d2d2;
+}
+
 td {
-  padding: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-right: 1px solid #d2d2d2;
 }
 
 th {
@@ -183,12 +189,12 @@ a{
     width: calc(100% / 7);
     
     table {
-      width: inherit;
+      width: 100%;
     }
-    td {
-      padding: 5px;
+    td.date {
+      
     }
-    th {
+    th.date {
       padding: 5px;
       background-color: lightgray;
     }
