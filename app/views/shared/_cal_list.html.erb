@@ -32,7 +32,7 @@
 						<li><%= events.where(PlayDate: @date).count %>
 							<ul>
 								<% events.where(PlayDate: @date).each do |event| %>
-									<li><%= link_to(event.artist_name, artist_path(event.artist_id)) %></li>
+									<li><%= link_to(event.artist_name, event_path(event)) %></li>
 								<% end %>
 							</ul>
 						</li>
