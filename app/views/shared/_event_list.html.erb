@@ -1,7 +1,7 @@
 <! Requires 'events' >
 <% if events.count != 0 %>
-	<div>
-		<div>
+	<div class="calendar">
+		<div class="cal_break">
 			<h1><%= @year = events.first.PlayDate.to_date.year %></h1>
 		</div>				
 		<table>
@@ -10,7 +10,9 @@
 					<% @date = event.PlayDate.to_date %>	
 					<% if @date.year != @year %>
 						</table>
-						<h1><%= @year = @date.year %></h1>
+						<div class="cal_break">
+						    <h1><%= @year = @date.year %></h1>
+						</div>
 						<table>
 					<% end %>
 					<tr>

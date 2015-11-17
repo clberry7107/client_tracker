@@ -1,0 +1,55 @@
+<! Requires 'events' >
+<% if events.count != 0 %>
+	<div class="calendar">
+		<div class="cal_break">
+			<h1><%= @year = Date.today.year %></h1>
+			<h2><% @month = Date.today.month %><%= Date.today.strftime('%B') %></h2>
+		</div>				
+		<div>
+				<% @date_range.each do |date| %>
+					<% if date != @date %>
+						<break/>
+						<% @date = date %>
+						</div>
+						<% if @date.year != @year %>
+						    <div class="cal_break">
+							    <h1><%= @year = @date.year %></h1>
+							    <h2><% @month = @date.month %><%= @date.strftime('%B') %></h2>
+							</div>
+						<% elsif @date.month != @month %>
+						    <div class="cal_break">
+						        <h2><% @month = @date.month %><%= @date.strftime('%B') %></h2>
+						    </div>
+						<% end %>
+						<div class="date">
+						<table>
+	    					<tr>
+	    						<th><%= @date.mday %></th>
+	    					</tr>
+	    				</table>
+					<% end %>
+					<ul class="count">
+						<li><%= events.where(PlayDate: @date).count %>
+							<ul>
+								<% events.where(PlayDate: @date).each do |event| %>
+									<li><%= link_to(event.artist_name, artist_path(event.artist_id)) %></li>
+								<% end %>
+							</ul>
+						</li>
+					</ul>
+				<% end %>
+			    
+		</div>
+	</div>
+<% end %>
+
+<script>
+	function showEvents(div, divDate){
+		block = getElementById(div);
+		block.innerHTML+='<table>' divDate;
+		<% events.where(PlayDate: Date.today ) do |event|%>;
+			block.innerHTML+='<tr><td><%= event.artist %></td>,</tr>';
+		<% end %>;
+		block.innerHTML+='</table>';
+	}
+</script>

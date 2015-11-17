@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
 	before_action :require_user
 	
 	def index
-		#Show all saved artist info
+		#Show all saved artists
 	end
 
 	def new
