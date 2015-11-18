@@ -29,8 +29,8 @@
 	    				</table>
 					<% end %>
 					<ul class="count">
-						<li><%= events.where(PlayDate: @date).count %>
-							<ul>
+						<li onclick=""><%= events.where(PlayDate: @date).count %>
+							<ul class="events">
 								<% events.where(PlayDate: @date).each do |event| %>
 									<li><%= link_to(event.artist_name, event_path(event)) %></li>
 								<% end %>
@@ -43,13 +43,3 @@
 	</div>
 <% end %>
 
-<script>
-	function showEvents(div, divDate){
-		block = getElementById(div);
-		block.innerHTML+='<table>' divDate;
-		<% events.where(PlayDate: Date.today ) do |event|%>;
-			block.innerHTML+='<tr><td><%= event.artist %></td>,</tr>';
-		<% end %>;
-		block.innerHTML+='</table>';
-	}
-</script>

@@ -202,14 +202,14 @@ a{
     ul.count li{
       list-style: none;
     }
-    ul.count li ul{
+    .events{
       display: none;
       position: absolute;
       list-style: none;
       background: lightgray;
       
     }
-    ul.count li:hover ul {
+    ul.count li:hover ul{
       display: block;
     }
     
