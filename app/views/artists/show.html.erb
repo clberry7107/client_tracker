@@ -1,7 +1,10 @@
-<h1>Tour dates for <%= @artist.ListName %>.</h1>
+<div class="header">
+	<h1>Tour dates for <%= @artist.ListName %>.</h1>
+</div>
 <div class="row">
 	<div id="side_bar">
 		<p><%= link_to "Home Screen", user_path(current_user) %></p>
+		<p><%= link_to "Artist List", artists_path %></p>
 		<p><%= link_to "Edit Details", edit_artist_path %></p>
 		<p><%= link_to "Delete Artist", artist_path, method: :delete %></p>
 		<hr>

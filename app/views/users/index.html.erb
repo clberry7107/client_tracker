@@ -1,4 +1,6 @@
-<h1>This is the user index page.</h1>
+<div class="header">
+    <h1>This is the user index page.</h1>
+</div>
 <p>There are <%= User.count %> users currently in the system.</p>
 <% @users.each do |user| %>
 	<p><%= user.fname + " " + user.lname %></p>
