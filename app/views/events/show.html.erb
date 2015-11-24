@@ -2,10 +2,6 @@
 	<h1><%= @event.artist_name %> in <%= @event.Region %></h1>
 </div>
 <div class="row">
-	<div id="side_bar">
-		<p><%= link_to "Home Screen", user_path(current_user) %></p>
-		<p><%= link_to "City List", cities_path %>
-	</div>
 	<div id="main_body">
 		<div id="event_details">
 			<table>
@@ -45,9 +41,9 @@
 		</div>
 		<div>	
 			<% if @other_events.count > 1 %>	
-				<h3>There are <%= @other_events.count %> near by events</h3>
+				<h3>There are <%= @other_events.count %> nearby events</h3>
 			<% elsif @other_events.count > 0 %>
-				<h3>There is <%= @other_events.count %> near by event</h3>
+				<h3>There is <%= @other_events.count %> nearby event</h3>
 			<% end %>
 		</div>
 		<%= render 'shared/event_list', events: @other_events %>

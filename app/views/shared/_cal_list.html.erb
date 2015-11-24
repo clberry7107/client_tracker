@@ -32,7 +32,14 @@
 						<li onclick=""><%= events.where(PlayDate: @date).count %>
 							<ul class="events">
 								<% events.where(PlayDate: @date).each do |event| %>
-									<li><%= link_to(event.artist_name, event_path(event)) %></li>
+								<% if event.artist.client_status == "Current" %>
+						            <li class="current">
+						        <% elsif event.artist.client_status == "Prospective" %>
+						            <li class="prospective">
+						        <% else %>
+						            <li class="former">
+						        <% end %>
+									<%= link_to(event.artist_name, event_path(event)) %></li>
 								<% end %>
 							</ul>
 						</li>

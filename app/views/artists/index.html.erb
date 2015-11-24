@@ -10,11 +10,19 @@
             <th>Artist Site</th>
         </tr>
         <% @artists.each do |artist| %>
-            <tr>
+            <tr 
+        <% if artist.client_status == "Current" %>
+            class="current">
+        <% elsif artist.client_status == "Prospective" %>
+            class="prospective">
+        <% else %>
+            class="former">
+        <% end %>
                 <td><%= link_to(artist.ListName, artist_path(artist.id)) %></td>
                 <td><%= link_to(artist.client_status, edit_artist_path(artist.id)) %></td>
                 <td><%= link_to("pollstar #{artist.ListName}", artist.Url) %></td>
                 <td></td>
+                </font>
             </tr>
         <% end %>
     </table>

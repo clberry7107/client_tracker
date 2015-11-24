@@ -1,13 +1,7 @@
 <div class="header">
 	<h1>Calendar for all tracked Artists</h1>
 </div>
-<div class="row">
-	<div id="side_bar">
-		<%= link_to "Search for Artist", search_artist_path %><br/>
-		<%= link_to "Artist List", artists_path %><br/>
-		<%= link_to("City List", cities_path) %>
-	</div>
-	<div id="main_body">
+
+	<div> 
 		<%= render 'shared/cal_list', events: @events %>
 	</div>
-</div>
