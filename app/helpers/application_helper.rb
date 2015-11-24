@@ -6,7 +6,6 @@ module ApplicationHelper
         if column != "ListName"
             second_sort = ", ListName asc"
         end
-        link_to title, :sort =>column, :direction => direction, :secondary => second_sort
-        
+        link_to title, :sort => column, :direction => direction, :secondary => second_sort
     end
 end
