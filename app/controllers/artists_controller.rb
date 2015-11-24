@@ -3,9 +3,11 @@ class ArtistsController < ApplicationController
 	before_action :valid_artist_name?, only: [:search]
 	before_action :require_user
 	
+	helper_method :sort_column, :sort_direction
+	
 	def index
 		#Show all saved artists
-		@artists = Artist.all.order(:ListName)
+		@artists = Artist.all.order(sort_column + " " + sort_direction + sort_secondary)
 	end
 
 	def new
@@ -95,6 +97,18 @@ class ArtistsController < ApplicationController
 
 		def artist_params
 			params.require(:artist).permit(:ListName, :ArtistID, :Url, :client_status)
+		end
+		
+		def sort_column
+			Artist.column_names.include?(params[:sort]) ? params[:sort] : "ListName"
+		end
+		
+		def sort_direction
+			%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+		end
+		
+		def sort_secondary
+			params[:secondary] == ", ListName asc" ? params[:secondary] : ""	
 		end
 	
 		#Ensures user has entered name in search field
