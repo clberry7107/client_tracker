@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
 	
 	def index
 		#Show all saved artists
-		@artists = Artist.all.order(sort_column + " " + sort_direction).order(sort_secondary)
+		@artists = Artist.all.order(sort_column + " " + sort_direction + sort_secondary)
 	end
 
 	def new
@@ -104,11 +104,11 @@ class ArtistsController < ApplicationController
 		end
 		
 		def sort_direction
-			%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+			%w[asc desc].include?(params[:direction]) ? params[:direction] : "ASC"
 		end
 		
 		def sort_secondary
-			params[:secondary] == ", ListName asc" ? params[:secondary] : ""	
+			params[:secondary] == ", ListName ASC" ? params[:secondary] : ""	
 		end
 	
 		#Ensures user has entered name in search field
