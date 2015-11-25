@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
 	
 	def index
 		#Show all saved artists
-		@artists = Artist.all.order(sort_column + " " + sort_direction + sort_secondary)
+		@artists = Artist.all.order(sort_column + " " + sort_direction).order(sort_secondary)
 	end
 
 	def new
