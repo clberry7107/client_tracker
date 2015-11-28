@@ -21,7 +21,12 @@
 						        <h2><% @month = @date.month %><%= @date.strftime('%B') %></h2>
 						    </div>
 						<% end %>
-						<div class="date">
+						<% if @corelated_events.include?(@date) %>
+							<div class="date" id="multiple">
+						<% else %>
+							<div class="date">
+								
+						<% end %>
 						<table>
 	    					<tr>
 	    						<th><%= @date.mday %></th>

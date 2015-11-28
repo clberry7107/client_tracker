@@ -8,4 +8,6 @@ module ApplicationHelper
         end
         link_to title, :sort => column, :direction => direction, :secondary => second_sort
     end
+    
+
 end

@@ -3,10 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   @@last_cal_update = Date.yesterday
+  
 
   helper_method :current_user, :logged_in?, :require_user, :ps_key, :update_cal, :last_updated
-  helper_method :get_events, :get_address
-
+  helper_method :get_events, :get_address, :corelated_events
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
     
@@ -39,13 +40,15 @@ class ApplicationController < ActionController::Base
 
   #Clears and updates Event table
   def update_cal
-    if !updated_today?
+    if updated_today?
       Event.delete_all
-
+      @@corelated_events = nil
       Artist.all.each do |artist|
         get_events(artist)
       end
-
+      
+      all_events = Event.all.order(:PlayDate)
+      corelated_dates((all_events.first.PlayDate.to_date..all_events.last.PlayDate.to_date), all_events)
       @@last_cal_update = Date.today
     end
   end
@@ -103,4 +106,25 @@ class ApplicationController < ActionController::Base
 
     return address
   end
+  
+  def corelated_dates(date_range, events)
+    @@corelated_events = Array.new
+       
+    events.each do |event|
+      count = 0
+      events.each do |compare|
+        if event.PlayDate == compare.PlayDate && event.Region == compare.Region
+          count += 1
+        end
+      end
+        
+      if count > 1
+        @@corelated_events << event.PlayDate.to_date unless @@corelated_events.include?(event.PlayDate.to_date)
+      end
+    end
+    
+    return @@corelated_events
+  end
+
+  
 end

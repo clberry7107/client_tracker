@@ -9,10 +9,11 @@ class UsersController < ApplicationController
 	end
   
   def show
-    @artists = Artist.all.order(:ListName)
     @events = Event.all.order(:PlayDate)
     @today = Date.today
     @date_range = (@today..@events.last.PlayDate.to_date)
+    @corelated_events = corelated_dates(@date_range, @events)
+    
   end
   
   def new
