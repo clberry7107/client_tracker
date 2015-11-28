@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
   def update_cal
     if updated_today?
       Event.delete_all
-      @@corelated_events = nil
       Artist.all.each do |artist|
         get_events(artist)
       end
@@ -108,7 +107,7 @@ class ApplicationController < ActionController::Base
   end
   
   def corelated_dates(date_range, events)
-    @@corelated_events = Array.new
+    corelated_events = Array.new
        
     events.each do |event|
       count = 0
@@ -119,11 +118,12 @@ class ApplicationController < ActionController::Base
       end
         
       if count > 1
-        @@corelated_events << event.PlayDate.to_date unless @@corelated_events.include?(event.PlayDate.to_date)
+        coralation = {:date => event.PlayDate.to_date, :region_id => event.city_id, :region => event.Region}
+        corelated_events << coralation unless corelated_events.include?(coralation)
       end
     end
     
-    return @@corelated_events
+    return corelated_events
   end
 
   

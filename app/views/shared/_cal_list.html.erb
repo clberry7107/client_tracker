@@ -21,7 +21,7 @@
 						        <h2><% @month = @date.month %><%= @date.strftime('%B') %></h2>
 						    </div>
 						<% end %>
-						<% if @corelated_events.include?(@date) %>
+						<% if @corelated_events.select{|event| event[:date] == @date}.count > 0 %>
 							<div class="date" id="multiple">
 						<% else %>
 							<div class="date">
@@ -45,6 +45,10 @@
 						            <li class="former">
 						        <% end %>
 									<%= link_to(event.artist_name, event_path(event)) %></li>
+								<% end %>
+								<hr>
+								<% @corelated_events.select{|event| event[:date] == @date}.each do |city|%>
+									<li><%= link_to(city[:region], city_path(city[:region_id])) %></li>
 								<% end %>
 							</ul>
 						</li>
