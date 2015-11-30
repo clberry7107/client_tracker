@@ -48,7 +48,7 @@
 								<% end %>
 								<hr>
 								<% @corelated_events.select{|event| event[:date] == @date}.each do |city|%>
-									<li><%= link_to(city[:region], city_path(city[:region_id])) %></li>
+									<li><%= link_to(city[:region], city_path(city[:region_id], :date => @date)) %></li>
 								<% end %>
 							</ul>
 						</li>

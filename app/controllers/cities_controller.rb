@@ -19,7 +19,13 @@ class CitiesController < ApplicationController
 
 	def show
 		@city = City.find(params[:id])
-		@events = @city.events.order(:PlayDate)
+		if params.has_key?(:date)
+			@events = @city.events.where(PlayDate: params[:date])
+		else
+			@events = @city.events.order(:PlayDate)
+		end
+		
+		
 	end
 
 	def create
