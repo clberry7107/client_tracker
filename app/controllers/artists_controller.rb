@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
 	
 	def index
 		#Show all saved artists
-		@artists = Artist.all.order("ListName")
+		@artists = Artist.all.order(:ListName)
 	end
 
 	def new
