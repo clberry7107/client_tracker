@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
 
   helper_method :current_user, :logged_in?, :require_user, :ps_key, :update_cal, :last_updated
-  helper_method :get_events, :get_address, :corelated_events
+  helper_method :get_events, :get_address, :corelated_events, :access_levels, :user_types
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -124,6 +124,14 @@ class ApplicationController < ActionController::Base
     end
     
     return corelated_events
+  end
+  
+  def access_levels
+    [[current_user.access_level, current_user.access_level], ['guest', 'guest'], ['user', 'user'], ['admin', 'admin']]
+  end
+  
+  def user_types
+    [[current_user.user_type, current_user.user_type], ['Technician', 'Technician'], ['Sales', 'Sales'], ['Project Management', 'Project Management'],['Administration', 'Administration']]
   end
 
   

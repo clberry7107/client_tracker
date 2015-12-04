@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
   
-  resources :users, except: [:delete]
+  resources :users
   resources :artists 
   resources :cities, except: [:delete]
   resources :events, except: [:delete]

@@ -7,7 +7,18 @@
    	<%= f.label "Last Name" %><%= f.text_field :lname%>
    	<%= f.label :email %><%= f.email_field :email %>
    	<%= f.label :password %><%= f.password_field :password %>
-
+    <%= f.label "Access Level" %>
+        <%= f.select(:access_level) do %>
+            <% access_levels.each do |s| %>
+                <%= content_tag(:option, s.first, value: s.last) %>
+            <% end %>
+        <% end %>
+    <%= f.label "User Type" %> 
+       	<%= f.select(:user_type) do %>
+        	<% user_types.each do |s|%>
+       		    <%= content_tag(:option, s.first, value: s.last) %>
+           	<% end %>
+       	<% end %>
   	<%= f.submit(@user.new_record? ? 'Register':'Update Profile', class: "{}btn btn-success") %>
     <% end %>
   </div>

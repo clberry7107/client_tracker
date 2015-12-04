@@ -1,7 +1,29 @@
 <div class="header">
     <h1>This is the user index page.</h1>
 </div>
-<p>There are <%= User.count %> users currently in the system.</p>
-<% @users.each do |user| %>
-	<p><%= user.fname + " " + user.lname %></p>
-<% end %>
+<div>
+    <p>There are <%= User.count %> users currently in the system.</p>
+    <table>
+        <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th>email</th>
+            <th>Access Level</th>
+            <th>User Type</th>
+            <th>Delete User?</th>
+        </tr>
+        <tr>
+        <% @users.each do |user| %>
+        	<td><%= link_to(user.fname, edit_user_path(user)) %></td>
+        	<td><%= user.lname %></td>
+        	<td><%= user.email %></td>
+        	<td><%= user.access_level %></td>
+        	<td><%= user.user_type %></td>
+        	<td><%= link_to("delete user", user_path(user), :method => :delete) %></td>
+        	</tr>
+        <% end %>
+        
+    </table>
+
+</div>
+
