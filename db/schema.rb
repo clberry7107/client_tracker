@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023162420) do
+ActiveRecord::Schema.define(version: 20151231065613) do
 
   create_table "artist_events", force: :cascade do |t|
     t.integer "artist_id"
@@ -51,17 +51,6 @@ ActiveRecord::Schema.define(version: 20151023162420) do
 
   add_index "city_events", ["city_id"], name: "index_city_events_on_city_id"
   add_index "city_events", ["event_id"], name: "index_city_events_on_event_id"
-
-  create_table "city_tables", force: :cascade do |t|
-    t.integer  "CityId"
-    t.string   "CityName"
-    t.string   "State"
-    t.string   "Region"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "events", force: :cascade do |t|
     t.integer  "EventID"

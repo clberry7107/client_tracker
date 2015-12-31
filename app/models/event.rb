@@ -11,5 +11,9 @@ class Event < ActiveRecord::Base
 	def city
 		City.find(city_id)
 	end
+	
+	def table_name
+		self.table_name
+	end
 
 end

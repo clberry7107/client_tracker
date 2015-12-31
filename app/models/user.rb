@@ -14,5 +14,9 @@ class User < ActiveRecord::Base
                     uniqueness: {case_sensitive: false}, 
                     format: {with: VALID_EMAIL_REGEX}
     #NEED TO ADD EMAIL CONFIRMATION BY ACTION MAILER
+    
+    def table_name
+		self.table_name
+	end
 
 end

@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   post '/search', to: 'artists#search'
   get '/search', to: 'artists#search'
   get '/add_artist', to: 'artists#create'
+  
+  get '/utilities', to: 'utilities#show'
+  
+  
 end
