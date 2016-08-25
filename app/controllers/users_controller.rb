@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @events = Event.all.order(:PlayDate)
     @today = Date.today
-    @date_range = (@today..@events.last.PlayDate.to_date)
+    @date_range = (@today..@events.last.PlayDate.to_date) || 0
     @corelated_events = corelated_dates(@date_range, @events)
     
   end

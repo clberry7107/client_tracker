@@ -4,25 +4,38 @@
 <div class="row">
 	<div id="main_body">
 		<ul><%= @state %>
+		<table>
 		<% @us_cities.each do |city|%>
 			<% if city.State != @state %>
+				</table>
 				</ul>
-				<hr>
+				<hr/>
 				<ul><%= city.State %>
+				<table>
 			<% end %>
-			<li><%= link_to(city.CityName, city_path(city)) %></li>
+			<tr>
+				<td><%= link_to(city.CityName, city_path(city)) %></td>
+				<td><%= city.events.count %></td>
+			</tr>
 			<% @state = city.State %>
 		<% end %>
+		</table>
 		<h3>International Cities:</h3>
 		<% @in_cities.each do |city|%>
 			<% if city.CountryName != @state %>
+				</table>
 				</ul>
-				<hr>
+				<hr/>
 				<ul><%= city.CountryName %>
+				<table>
 			<% end %>
-			<li><%= link_to(city.CityName, city_path(city)) %></li>
+			<tr>
+				<td><%= link_to(city.CityName, city_path(city)) %></td>
+				<td><%= city.events.count %></td>
+			</tr>
 			<% @state = city.CountryName %>
 		<% end %>
+		</table>
 		</ul>
 	</div>
 </div>
