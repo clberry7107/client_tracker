@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231065613) do
+ActiveRecord::Schema.define(version: 20160823200028) do
 
   create_table "artist_events", force: :cascade do |t|
     t.integer "artist_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151231065613) do
     t.string   "client_status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "artist_url"
   end
 
   create_table "cities", force: :cascade do |t|

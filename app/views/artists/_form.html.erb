@@ -4,14 +4,13 @@
   <div class="well col-md-8 col-md-offset-2">
    <%= form_for @artist do |f| %>
  	  <%= f.label "Name:" %><%= f.text_field :ListName%>
-   	<%= f.label "ArtistID:" %><%= f.text_field :ArtistID%>
    	<%= f.label "Status" %>
    	<%= f.select(:client_status) do %>
    		<% [[@artist.client_status, @artist.client_status],['Current', 'Current'], ['Former', 'Former'], ['Prospective', 'Prospective']].each do |s|%>
    			<%= content_tag(:option, s.first, value: s.last) %>
    		<% end %>
    	<% end %>
-
+    <%= f.label "Artist Website:" %><%= f.text_field :artist_url %>
   	<%= f.submit('Update Status', class: "btn btn-success") %>
     <% end %>
   </div>

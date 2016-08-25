@@ -21,7 +21,7 @@
                 <td><%= link_to(artist.ListName, artist_path(artist.id)) %></td>
                 <td><%= link_to(artist.client_status, edit_artist_path(artist.id)) %></td>
                 <td><%= link_to("pollstar #{artist.ListName}", artist.Url) %></td>
-                <td></td>
+                <td><%= link_to("#{artist.artist_url}", artist.f_artist_url, :target => 'blank') %></td>
                 </font>
             </tr>
         <% end %>

@@ -78,6 +78,7 @@ class ArtistsController < ApplicationController
 		#Change artist status
 		artist = Artist.find(params[:id])
 		artist.update(client_status: artist_params[:client_status])
+		artist.update(artist_url: Artist.clean_url(artist_params[:artist_url]))
 		redirect_to user_path(current_user)
 	end
 
@@ -96,7 +97,7 @@ class ArtistsController < ApplicationController
 	private
 
 		def artist_params
-			params.require(:artist).permit(:ListName, :ArtistID, :Url, :client_status)
+			params.require(:artist).permit(:ListName, :ArtistID, :Url, :client_status, :artist_url)
 		end
 		
 		def sort_column

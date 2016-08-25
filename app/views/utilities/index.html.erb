@@ -1,0 +1,22 @@
+<div class="header">
+    <h1>Database Utilities</h1>
+</div>
+<div>
+    <div class="row">
+        <%= link_to "Update Calendar", 'update_cal', method: :get, class: "button success" %>
+    </div>
+    <div class="row">
+        <table>
+            <tr>
+                <th>Table Name</th>
+                <th>Row Count</th>
+            </tr>
+            <% @tables.each do |table| %>
+            <tr>
+                <td><%= table[:name] %></td>
+                <td><%= table[:count] %></td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+</div>

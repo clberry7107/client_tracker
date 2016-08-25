@@ -3,7 +3,8 @@
 </div>
 <div class="row">
 	<div id="main_body">
-		<% @cities.each do |city|%>
+		<ul><%= @state %>
+		<% @us_cities.each do |city|%>
 			<% if city.State != @state %>
 				</ul>
 				<hr>
@@ -11,6 +12,16 @@
 			<% end %>
 			<li><%= link_to(city.CityName, city_path(city)) %></li>
 			<% @state = city.State %>
+		<% end %>
+		<h3>International Cities:</h3>
+		<% @in_cities.each do |city|%>
+			<% if city.CountryName != @state %>
+				</ul>
+				<hr>
+				<ul><%= city.CountryName %>
+			<% end %>
+			<li><%= link_to(city.CityName, city_path(city)) %></li>
+			<% @state = city.CountryName %>
 		<% end %>
 		</ul>
 	</div>

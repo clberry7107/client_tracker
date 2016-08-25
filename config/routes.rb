@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :artists 
   resources :cities, except: [:delete]
   resources :events, except: [:delete]
-
+  resources :utilities
+  
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   get '/search', to: 'artists#search'
   get '/add_artist', to: 'artists#create'
   
-  get '/utilities', to: 'utilities#show'
+  get '/update_cal', to: 'utilities#edit'
   
   
 end
