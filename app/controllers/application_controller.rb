@@ -83,10 +83,16 @@ class ApplicationController < ActionController::Base
       event.artist_name = artist.ListName
       event.artist_id = artist.id
       
+      # Ensure CountryName valide and present
+      city.ensure_CountryName
+      event.ensure_CountryName
+      
+      # Verify / Add city to city table
       city = City.find_by CityID: city.CityID unless city.save
       event.city_id = city.id
       event.save
-
+      
+      # Create link table entries
       ArtistEvent.create({:artist => artist, :event => event})
       CityEvent.create({:city => city, :event => event})
     end
@@ -133,6 +139,6 @@ class ApplicationController < ActionController::Base
   def user_types
     [[current_user.user_type, current_user.user_type], ['Technician', 'Technician'], ['Sales', 'Sales'], ['Project Management', 'Project Management'],['Administration', 'Administration']]
   end
-
+  
   
 end
