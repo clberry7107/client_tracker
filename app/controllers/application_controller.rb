@@ -41,7 +41,10 @@ class ApplicationController < ActionController::Base
   #Clears and updates Event table
   def update_cal
     if !updated_today?
-      Event.delete_all
+      Event.destroy_all
+      CityEvent.destroy_all
+      ArtistEvent.destroy_all
+      
       Artist.all.each do |artist|
         get_events(artist)
       end

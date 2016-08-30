@@ -31,6 +31,8 @@ gem 'bcrypt', '3.1.10'
 gem 'fog', '1.23.0'
 
 
+# Used for client side datatables
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

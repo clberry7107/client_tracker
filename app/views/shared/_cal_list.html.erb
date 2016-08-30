@@ -34,7 +34,9 @@
 	    				</table>
 					<% end %>
 					<ul class="count">
-						<li onclick=""><%= events.where(PlayDate: @date).count %>
+						<li onclick=""><%=	(@local = events.where(PlayDate: @date)).count %>
+						<% if @local.where(CityName: "Cleveland").count > 0 %> *<% end %>
+						<% if @local.where(CityName: "Los Angeles").count > 0 %> ^<% end %>
 							<ul class="events">
 								<% events.where(PlayDate: @date).each do |event| %>
 								<% if event.artist.client_status == "Current" %>
@@ -44,7 +46,15 @@
 						        <% else %>
 						            <li class="former">
 						        <% end %>
-									<%= link_to(event.artist_name, event_path(event)) %></li>
+									<% if event.CityName == "Cleveland" %>
+										<% @artist_name = "#{event.artist_name} *" %>
+									<% elsif event.CityName == "Los Angeles" %>
+										<% @artist_name = "#{event.artist_name} ^" %>
+									<% else %>
+										<% @artist_name = event.artist_name %>
+									<% end %>
+									<%= link_to(@artist_name, event_path(event)) %></li>
+									
 								<% end %>
 								<hr>
 								<% @corelated_events.select{|event| event[:date] == @date}.each do |city|%>

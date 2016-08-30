@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 	has_many :city_events, dependent: :destroy
-
+	
+	before_save :ensure_CountryName
 	validates :EventID, uniqueness: true
 	
 	#had issues with 'belongs_to'.  these are a workaround

@@ -1,41 +1,49 @@
 <div class="header">
 	<h1>City Index</h1>
 </div>
+    <%= fields_for :search do %>
+      <%= label_tag "Search this list" %>
+      <%= text_field_tag :search %>
+    <% end %>
 <div class="row">
 	<div id="main_body">
-		<ul><%= @state %>
-		<table>
-		<% @us_cities.each do |city|%>
-			<% if city.State != @state %>
-				</table>
-				</ul>
-				<hr/>
-				<ul><%= city.State %>
-				<table>
-			<% end %>
-			<tr>
-				<td><%= link_to(city.CityName, city_path(city)) %></td>
-				<td><%= city.events.count %></td>
-			</tr>
-			<% @state = city.State %>
-		<% end %>
+		<table class="search_table">
+			<thead>
+				<tr>
+					<th>Country</th>
+					<th>State</th>
+					<th>City</th>
+					<th># of Events</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= @country %></td>
+				</tr>
+				<% @cities.each do |city|%>
+					<% if city.CountryName != @country %>
+						<tr>
+							<td><%= @country = city.CountryName %></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><%= @state = city.State %></td>
+						</tr>
+					<% end %>
+					<% if city.State != @state %>
+						<tr>
+							<td></td>
+							<td><%= @state = city.State %></td>
+						</tr>
+					<% end %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><%= link_to(city.CityName, city_path(city)) %></td>
+						<td><%= city.events.count %></td>
+					</tr>
+				<% end %>
+			</tbody>
 		</table>
-		<h3>International Cities:</h3>
-		<% @in_cities.each do |city|%>
-			<% if city.CountryName != @state %>
-				</table>
-				</ul>
-				<hr/>
-				<ul><%= city.CountryName %>
-				<table>
-			<% end %>
-			<tr>
-				<td><%= link_to(city.CityName, city_path(city)) %></td>
-				<td><%= city.events.count %></td>
-			</tr>
-			<% @state = city.CountryName %>
-		<% end %>
-		</table>
-		</ul>
 	</div>
 </div>

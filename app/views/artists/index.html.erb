@@ -2,7 +2,11 @@
     <h1>Artist List</h1>
 </div>
 <div>
-    <table>
+    <%= fields_for :search do %>
+      <%= label_tag "Search this list" %>
+      <%= text_field_tag :search %>
+    <% end %>
+    <table class="search_table">
         <tr>
             <th><%= sortable "ListName", "Name" %></th>
             <th><%= sortable "client_status", "Status" %></th>

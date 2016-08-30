@@ -9,9 +9,11 @@ class CitiesController < ApplicationController
 			redirect_to user_path(current_user)
 		end
 		
+		@cities = City.all.order(:CountryName, :State, :CityName)
 		@us_cities = City.where.not(State: "").order(:State)
 		@in_cities = City.where(State: "").order(:CountryName)
-		@state = @us_cities.first.State #unless @us_cities.count == 0
+		@country = @cities.first.CountryName
+		@state = @cities.first.State
 	end
 
 	def new
