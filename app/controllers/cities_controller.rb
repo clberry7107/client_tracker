@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
 
-	before_action :require_user
+	# before_action :require_user
 	
 	
 	def index
@@ -25,7 +25,7 @@ class CitiesController < ApplicationController
 		if params.has_key?(:date)
 			@events = @city.events.where(PlayDate: params[:date])
 		else
-			@events = @city.events.order(:PlayDate)
+			@events = @city.events.where('PlayDate > ?', Date.yesterday).order(:PlayDate)
 		end
 		
 		

@@ -10,7 +10,7 @@ class UtilitiesController < ApplicationController
    
    def edit
        update_cal
-       redirect_to root_path
+       redirect_to events_path
        
    end
     

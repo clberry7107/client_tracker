@@ -9,13 +9,13 @@
         <%= link_to "Client Tracker", root_path, class: "btn btn-lg btn-success", id: "logo" %>
       </div>
       <% if logged_in? %>
-        <div class="nav_item">
-          <%= link_to "Log out", logout_path, class: "btn btn-lg btn-success" %>
-          <%= link_to "Profile", edit_user_path(current_user), class: "btn btn-lg btn-success" %>
-        </div>
+        <!--<div class="nav_item">-->
+        <!--  <%= link_to "Log out", logout_path, class: "btn btn-lg btn-success" %>-->
+        <!--  <%= link_to "Profile", edit_user_path(current_user), class: "btn btn-lg btn-success" %>-->
+        <!--</div>-->
         <div class="sub_menu">
            <ul class="sub_menu">
-             <li><%= link_to("Main Calendar", root_path) %></li>
+             <li><%= link_to("Main Calendar",events_path) %></li>
              <li><%= link_to("Artist List", artists_path) %></li>
              <li><%= link_to("City List", cities_path) %></li>
              <li><%= link_to("Search for Artist", search_artist_path) %></li>

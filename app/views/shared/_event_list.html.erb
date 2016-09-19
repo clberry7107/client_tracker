@@ -5,7 +5,7 @@
 			<h1><%= @year = events.first.PlayDate.to_date.year %></h1>
 		</div>				
 		<table>
-			<% events.each do |event| %>
+			<% events.where('PlayDate > ?', Date.yesterday).each do |event| %>
 				<% if event.PlayDate.to_date != @date %>							
 					<% @date = event.PlayDate.to_date %>	
 					<% if @date.year != @year %>

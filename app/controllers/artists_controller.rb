@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 	before_action :valid_selection?, only: [:create]
 	before_action :valid_artist_name?, only: [:search]
-	before_action :require_user
+	# before_action :require_user
 	
 	helper_method :sort_column, :sort_direction
 	
@@ -79,7 +79,7 @@ class ArtistsController < ApplicationController
 		artist = Artist.find(params[:id])
 		artist.update(client_status: artist_params[:client_status])
 		artist.update(artist_url: Artist.clean_url(artist_params[:artist_url]))
-		redirect_to user_path(current_user)
+		redirect_to artist_path(artist)
 	end
 
 	def destroy

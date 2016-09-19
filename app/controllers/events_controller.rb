@@ -1,10 +1,14 @@
 class EventsController < ApplicationController
 
-before_action :require_user
+# before_action :require_user
 
 def index
 	#Show all saved Events info
-	@events = Events.all
+	@events = Event.all.order(:PlayDate)
+    @today = Date.today
+    @date_range = (@today..@events.last.PlayDate.to_date) || 0
+    @corelated_events = corelated_dates(@date_range, @events)
+    
 end
 
 
@@ -31,7 +35,7 @@ def show
 	#Show related events
 	@other_events = other_events.reject {|event| event.Region != @event.Region || event == @event}
 	@other_events.sort_by(&:PlayDate)
-	end
+end
 
 
 def update
