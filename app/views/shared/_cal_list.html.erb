@@ -35,8 +35,7 @@
 					<% end %>
 					<ul class="count">
 						<li onclick=""><%=	(@local = events.where(PlayDate: @date)).count %>
-						<% if @local.where(CityName: "Cleveland").count > 0 %> *<% end %>
-						<% if @local.where(CityName: "Los Angeles").count > 0 %> ^<% end %>
+						<%= near_shop(@local) %>
 							<ul class="events">
 								<% events.where(PlayDate: @date).each do |event| %>
 								<% if event.artist.client_status == "Current" %>
@@ -46,13 +45,7 @@
 						        <% else %>
 						            <li class="former">
 						        <% end %>
-									<% if event.CityName == "Cleveland" %>
-										<% @artist_name = "#{event.artist_name} *" %>
-									<% elsif event.CityName == "Los Angeles" %>
-										<% @artist_name = "#{event.artist_name} ^" %>
-									<% else %>
-										<% @artist_name = event.artist_name %>
-									<% end %>
+									<% @artist_name = event.artist_name + shop_marker(event.Region) %>
 									<%= link_to(@artist_name, event_path(event)) %></li>
 									
 								<% end %>
