@@ -40,7 +40,7 @@
 						<td></td>
 						<td></td>
 						<td><%= link_to(city.CityName, city_path(city)) %></td>
-						<td><%= city.events.where('PlayDate > ?', Date.yesterday).count %></td>
+						<td><%= city.events.where("PlayDate > ?", Date.yesterday).count %></td>
 					</tr>
 				<% end %>
 			</tbody>
