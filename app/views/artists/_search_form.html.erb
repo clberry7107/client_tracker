@@ -5,7 +5,6 @@
     <%= form_tag("/search", method: "get") do %>
      	<%= label_tag "Name of Artist to search for" %>
      	<%= text_field_tag :artist %>
-     	<%= hidden_field_tag :user , current_user.id %>
      	<%= hidden_field_tag :type, 'Search' %>
     	<%= submit_tag "Search" %>
     <% end %>

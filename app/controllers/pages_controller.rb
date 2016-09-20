@@ -4,9 +4,11 @@ class PagesController < ApplicationController
 		# if logged_in?
 		# 	redirect_to user_path(current_user)
 		# end
+		session[:authorized] = nil
 		
 		if params[:key] == "5450Avion"
-			redirect_to user_path(current_user)
+			session[:authorized] = :true
+			redirect_to events_path
 		end
 		
 		#show home page

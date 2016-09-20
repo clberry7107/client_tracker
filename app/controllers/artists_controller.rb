@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 	before_action :valid_selection?, only: [:create]
 	before_action :valid_artist_name?, only: [:search]
-	# before_action :require_user
+	before_action :authorized_session?
 	
 	helper_method :sort_column, :sort_direction
 	
@@ -39,7 +39,7 @@ class ArtistsController < ApplicationController
 				if match_type.to_i < 3 
 					artistID = a.attribute('ID').to_s
 					@artists << TempArtist.create({:ListName => a.attribute('ListName').to_s, :ArtistID => artistID.to_i, :Genre => a.attribute('Genre'), :Url => a.attribute('Url')})
-					UserTempArtist.create({:temp_artist_id => @artists.last.id, :user_id => current_user.id})
+					UserTempArtist.create({:temp_artist_id => @artists.last.id})
 				end
 			end
 		else
@@ -58,9 +58,8 @@ class ArtistsController < ApplicationController
 			
 		redirect_to edit_artist_path(@artist)
 		get_events(@artist)
-		artists = current_user.temp_artists
-		artists.each{|a| TempArtist.find(a).delete}
-		current_user.temp_artists.delete_all
+		TempArtist.delete_all
+		UserTempArtist.delete_all
 	end
 
 	def edit
@@ -91,7 +90,7 @@ class ArtistsController < ApplicationController
 		end
 		artist.events.delete_all
 		artist.delete
-		redirect_to user_path(current_user)
+		redirect_to artists_path
 	end
 
 	private

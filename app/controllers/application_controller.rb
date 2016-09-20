@@ -23,6 +23,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+  
+  def authorized_session?
+    if !session[:authorized]
+      redirect_to root_path
+    end
+    return true
+  end
 
   #Pollstar.com API key
   def ps_key

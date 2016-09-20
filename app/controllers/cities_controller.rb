@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
 
-	# before_action :require_user
+	before_action :authorized_session?
 	
 	
 	def index

@@ -1,4 +1,5 @@
 class UtilitiesController < ApplicationController
+   before_action :authorized_session?
    
    def index
        @tables = Array.new()
