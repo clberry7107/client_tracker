@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 		# end
 		session[:authorized] = nil
 		
-		if params[:key] == "5450Avion"
+		if params[:key] == ENV['PASSKEY']
 			session[:authorized] = :true
 			redirect_to events_path
 		end

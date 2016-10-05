@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
 
   #Pollstar.com API key
   def ps_key
-    # "&apiKey=22300-7812380"
     ENV['POLLSTAR_API_KEY']
   end
 
