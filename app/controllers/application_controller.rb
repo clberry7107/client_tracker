@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
   def authorized_session?
     start = Time.parse(session[:start_time])
     duration = ((Time.now - start)  / 60 ) 
-    # duration = duration / 60
+    duration = duration / 60
     
     relog = ""
     
-    if duration > 1
+    if duration > 6
       relog = relog + "/?key=" + ENV['PASSKEY']
     elsif session[:authorized]
       return true
