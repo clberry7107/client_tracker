@@ -25,11 +25,20 @@ class ApplicationController < ActionController::Base
   end
   
   def authorized_session?
-    if !session[:authorized]
-      redirect_to root_path
+    start = Time.parse(session[:start_time])
+    duration = ((Time.now - start)  / 60 ) 
+    # duration = duration / 60
+    
+    relog = ""
+    
+    if duration > 1
+      relog = relog + "/?key=" + ENV['PASSKEY']
+    elsif session[:authorized]
+      return true
     end
-    return true
-  end
+    
+    redirect_to relog
+  end 
 
   #Pollstar.com API key
   def ps_key
@@ -38,11 +47,11 @@ class ApplicationController < ActionController::Base
 
   #Test when the database was last updated
   def updated_today?
-    Date.today == @@last_cal_update
+    Date.today.day == DateTime.parse(ENV['LAST_UPDATE']).day
   end
   
   def last_updated
-    @@last_cal_update
+    @@last_cal_update = ENV['LAST_UPDATE']
   end
 
   #Clears and updates Event table
@@ -58,7 +67,7 @@ class ApplicationController < ActionController::Base
       
       all_events = Event.all.order(:PlayDate)
       corelated_dates((all_events.first.PlayDate.to_date..all_events.last.PlayDate.to_date), all_events)
-      @@last_cal_update = Date.today
+      ENV['LAST_UPDATE'] = DateTime.now.to_s
     end
   end
 

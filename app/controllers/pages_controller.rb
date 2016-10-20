@@ -8,6 +8,12 @@ class PagesController < ApplicationController
 		
 		if params[:key] == ENV['PASSKEY']
 			session[:authorized] = :true
+			session[:start_time] = Time.now
+			
+			if !updated_today?
+				update_cal
+			end
+			
 			redirect_to events_path
 		end
 		
