@@ -3,16 +3,22 @@ module UpdateHelper
   #Clears and updates Event table
   def update_cal
     # if !updated_today?
-      Event.destroy_all
-      CityEvent.destroy_all
-      ArtistEvent.destroy_all
+      
+      p_events = Event.where('PlayDate < ?', Date.today.to_s)
+      p_events.each do |pe|
+        CityEvent.where(event_id: pe.EventID).destroy_all
+        ArtistEvent.where(event_id: pe.EventID).destroy_all
+      end
+      p_events.destroy_all
       
       Artist.all.each do |artist|
         get_events(artist)
       end
       
       all_events = Event.all.order(:PlayDate)
-      corelated_dates((all_events.first.PlayDate.to_date..all_events.last.PlayDate.to_date), all_events)
+      if all_events.count > 0
+        corelated_dates((all_events.first.PlayDate.to_date..all_events.last.PlayDate.to_date), all_events)
+      end
       ENV['LAST_UPDATE'] = DateTime.now.to_s
     # end
   end
@@ -26,41 +32,44 @@ module UpdateHelper
     all_artist_events = doc.xpath("//ArtistInfo//Events/Event")  
 
     all_artist_events.each do |ne|
-      event = Event.new
-      city = City.new
-      event.EventID = ne.attribute('EventID').to_s
-      event.EventName = ne.attribute('EventName').to_s
-      event.VenueID = ne.attribute('VenueID').to_s
-      event.VenueName = ne.attribute('VenueName').to_s
-      event.CityID = ne.attribute('CityID').to_s
-      city.CityID = ne.attribute('CityID').to_s
-      event.CityName = ne.attribute('CityName').to_s
-      city.CityName = ne.attribute('CityName').to_s
-      event.State = ne.attribute('State').to_s
-      city.State = ne.attribute('State').to_s
-      event.CountryName = ne.attribute('CountryName').to_s
-      city.CountryName = ne.attribute('CountryName').to_s
-      event.Region = ne.attribute('Region').to_s
-      city.Region = ne.attribute('Region').to_s
-      event.PlayDate = Date.parse(ne.attribute('PlayDate').to_s.gsub(/, */, '-'))
-      event.Playtime = ne.attribute('PlayTime').to_s
-      event.Url = ne.attribute('Url').to_s
-      event.artist_name = artist.ListName
-      event.artist_id = artist.id
-      
-      # Ensure CountryName valide and present
-      city.ensure_CountryName
-      event.ensure_CountryName
-      
-      # Verify / Add city to city table
-      city = City.find_by CityID: city.CityID unless city.save
-      event.city_id = city.id
-      event.save
-      
-      # Create link table entries
-      ArtistEvent.create({:artist => artist, :event => event})
-      CityEvent.create({:city => city, :event => event})
+      if Event.where(EventID: ne.attribute('EventID').to_s).count < 1
+        event = Event.new
+        city = City.new
+        event.EventID = ne.attribute('EventID').to_s
+        event.EventName = ne.attribute('EventName').to_s
+        event.VenueID = ne.attribute('VenueID').to_s
+        event.VenueName = ne.attribute('VenueName').to_s
+        event.CityID = ne.attribute('CityID').to_s
+        city.CityID = ne.attribute('CityID').to_s
+        event.CityName = ne.attribute('CityName').to_s
+        city.CityName = ne.attribute('CityName').to_s
+        event.State = ne.attribute('State').to_s
+        city.State = ne.attribute('State').to_s
+        event.CountryName = ne.attribute('CountryName').to_s
+        city.CountryName = ne.attribute('CountryName').to_s
+        event.Region = ne.attribute('Region').to_s
+        city.Region = ne.attribute('Region').to_s
+        event.PlayDate = Date.parse(ne.attribute('PlayDate').to_s.gsub(/, */, '-'))
+        event.Playtime = ne.attribute('PlayTime').to_s
+        event.Url = ne.attribute('Url').to_s
+        event.artist_name = artist.ListName
+        event.artist_id = artist.id
+        
+        # Ensure CountryName valide and present
+        city.ensure_CountryName
+        event.ensure_CountryName
+        
+        # Verify / Add city to city table
+        city = City.find_by CityID: city.CityID unless city.save
+        event.city_id = city.id
+        event.save
+        
+        # Create link table entries
+        ArtistEvent.create({:artist => artist, :event => event})
+        CityEvent.create({:city => city, :event => event})
+      end
     end
+  
   end 
   
   

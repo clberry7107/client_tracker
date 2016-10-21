@@ -6,7 +6,7 @@ def index
 	#Show all saved Events info
 	@events = Event.all.order(:PlayDate)
     @today = Date.today
-    @date_range = (@today..@events.last.PlayDate.to_date) || 0
+    @date_range = (@today..@events.last.PlayDate.to_date) rescue 0
     @corelated_events = corelated_dates(@date_range, @events)
     
 end
@@ -48,6 +48,9 @@ end
 def destroy
 	#remove all selected artist events from events table
 	@event = Event.find(params[:id])
+	CityEvent.where(event_id: @event).delete_all
+	ArtistEvent.where(event_id: @event).delete_all
+	@event.delete
 end
 
 
