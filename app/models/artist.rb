@@ -18,9 +18,7 @@ class Artist < ActiveRecord::Base
 	end
 	
 	def self.clean_url(artist_url)
-		parts = artist_url.split('.')
-		parts.delete_at(0)
-		return parts.join(".")
+		artist_url.gsub('http://', "")
 	end
 	
 end
