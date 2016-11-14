@@ -4,7 +4,7 @@
   <div class="well col-md-8 col-md-offset-2">
     <%= form_tag("/search", method: "get") do %>
      	<%= label_tag "Name of Artist to search for" %>
-     	<%= text_field_tag :artist %>
+     	<%= text_field_tag :artist, "", autofocus: true %>
      	<%= hidden_field_tag :type, 'Search' %>
     	<%= submit_tag "Search" %>
     <% end %>

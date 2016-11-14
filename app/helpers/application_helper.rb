@@ -14,6 +14,7 @@ module ApplicationHelper
         cities.each do |city|
             markers << shop_marker(city.Region)
         end
+        markers.uniq!
         markers.reject!{|item| item.empty?}
         marks = ""
         markers.each do |mark|

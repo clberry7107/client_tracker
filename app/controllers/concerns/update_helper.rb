@@ -4,12 +4,14 @@ module UpdateHelper
   def update_cal
     # if !updated_today?
       
-      p_events = Event.where("PlayDate < ?", Date.today.to_s)
+      p_events = Event.all #.where("PlayDate < ?", Date.today.to_s)
       p_events.each do |pe|
         CityEvent.where(event_id: pe.EventID).destroy_all
         ArtistEvent.where(event_id: pe.EventID).destroy_all
       end
       p_events.destroy_all
+      
+      
       
       Artist.all.each do |artist|
         get_events(artist)
