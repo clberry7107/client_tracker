@@ -1,5 +1,5 @@
 module ApplicationHelper
-    shops = ["Clevend", "Los Angeles", "London", "Sydney"]
+    
     def sortable(column, title=nil)
         title ||= column.titleize
         direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"

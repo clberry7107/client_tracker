@@ -23,9 +23,9 @@ class CitiesController < ApplicationController
 	def show
 		@city = City.find(params[:id])
 		if params.has_key?(:date)
-			@events = @city.events.where(PlayDate: params[:date])
+			@events = @city.events.where(play_date: params[:date])
 		else
-			@events = @city.events.order(:PlayDate)
+			@events = @city.events.order(:play_date)
 		end
 		
 		

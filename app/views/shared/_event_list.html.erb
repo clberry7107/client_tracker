@@ -2,12 +2,12 @@
 <% if events.count != 0 %>
 	<div class="calendar">
 		<div class="cal_break">
-			<h1><%= @year = events.first.PlayDate.to_date.year %></h1>
+			<h1><%= @year = events.first.play_date.to_date.year %></h1>
 		</div>				
 		<table>
 			<% events.each do |event| %>
-				<% if event.PlayDate.to_date != @date %>							
-					<% @date = event.PlayDate.to_date %>	
+				<% if event.play_date.to_date != @date %>							
+					<% @date = event.play_date.to_date %>	
 					<% if @date.year != @year %>
 						</table>
 						<div class="cal_break">

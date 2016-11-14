@@ -34,10 +34,10 @@
 	    				</table>
 					<% end %>
 					<ul class="count">
-						<li onclick=""><%=	(@local = events.where(PlayDate: @date)).count %>
+						<li onclick=""><%=	(@local = events.where(play_date: @date)).count %>
 						<%= near_shop(@local) %>
 							<ul class="events">
-								<% events.where(PlayDate: @date).each do |event| %>
+								<% events.where(play_date: @date).each do |event| %>
 								<% if event.artist.client_status == "Current" %>
 						            <li class="current">
 						        <% elsif event.artist.client_status == "Prospective" %>

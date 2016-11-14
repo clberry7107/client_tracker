@@ -69,7 +69,7 @@ class ArtistsController < ApplicationController
 	def show
 		#Shows artist info and list of events
 		@artist = Artist.find(params[:id])
-		@events = @artist.events.order(:PlayDate)
+		@events = @artist.events.order(:play_date)
 	end
 
 

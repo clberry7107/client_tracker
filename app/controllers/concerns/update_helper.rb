@@ -2,9 +2,9 @@ module UpdateHelper
     
   #Clears and updates Event table
   def update_cal
-    # if !updated_today?
-      
-      p_events = Event.all #.where("PlayDate < ?", Date.today.to_s)
+    if !updated_today?
+
+      p_events = Event.all.where("play_date < ?", Date.today.to_s)
       p_events.each do |pe|
         CityEvent.where(event_id: pe.EventID).destroy_all
         ArtistEvent.where(event_id: pe.EventID).destroy_all
@@ -17,12 +17,12 @@ module UpdateHelper
         get_events(artist)
       end
       
-      all_events = Event.all.order(:PlayDate)
+      all_events = Event.all.order(:play_date)
       if all_events.count > 0
-        corelated_dates((all_events.first.PlayDate.to_date..all_events.last.PlayDate.to_date), all_events)
+        corelated_dates((all_events.first.play_date.to_date..all_events.last.play_date.to_date), all_events)
       end
       ENV['LAST_UPDATE'] = DateTime.now.to_s
-    # end
+    end
   end
 
   #Fetch artist events from Pollstar.com API
@@ -51,7 +51,7 @@ module UpdateHelper
         city.CountryName = ne.attribute('CountryName').to_s
         event.Region = ne.attribute('Region').to_s
         city.Region = ne.attribute('Region').to_s
-        event.PlayDate = Date.parse(ne.attribute('PlayDate').to_s.gsub(/, */, '-'))
+        event.play_date = Date.parse(ne.attribute('PlayDate').to_s.gsub(/, */, '-'))
         event.Playtime = ne.attribute('PlayTime').to_s
         event.Url = ne.attribute('Url').to_s
         event.artist_name = artist.ListName
@@ -96,13 +96,13 @@ module UpdateHelper
     events.each do |event|
       count = 0
       events.each do |compare|
-        if event.PlayDate == compare.PlayDate && event.Region == compare.Region
+        if event.play_date == compare.play_date && event.Region == compare.Region
           count += 1
         end
       end
         
       if count > 1
-        coralation = {:date => event.PlayDate.to_date, :region_id => event.city_id, :region => event.Region}
+        coralation = {:date => event.play_date.to_date, :region_id => event.city_id, :region => event.Region}
         corelated_events << coralation unless corelated_events.include?(coralation)
       end
     end

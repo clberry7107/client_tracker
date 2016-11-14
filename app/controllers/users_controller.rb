@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   # before_action :require_user, only: [:show, :update]
-# 	before_action :set_user, only: [:edit, :update]
+	before_action :set_user, only: [:edit, :update]
 # 	before_action :require_same_user, only: [:edit, :update] 
   before_action :authorized_session?
 	
@@ -10,9 +10,9 @@ class UsersController < ApplicationController
 	end
   
   def show
-    @events = Event.all.order(:PlayDate)
+    @events = Event.all.order(:play_date)
     @today = Date.today
-    @date_range = (@today..@events.last.PlayDate.to_date) || 0
+    @date_range = (@today..@events.last.play_date.to_date) || 0
     @corelated_events = corelated_dates(@date_range, @events)
     
   end
