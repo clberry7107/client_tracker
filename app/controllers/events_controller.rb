@@ -4,9 +4,9 @@ before_action :authorized_session?
 
 def index
 	#Show all saved Events info
-	@events = Event.all.order(:PlayDate)
+	@events = Event.all.order(:play_date)
     @today = Date.today
-    @date_range = (@today..@events.last.PlayDate.to_date) rescue 0
+    @date_range = (@today..@events.last.play_date.to_date) rescue 0
     @corelated_events = corelated_dates(@date_range, @events)
     
 end
@@ -30,11 +30,11 @@ def show
 	#Shows artist info and list of events
 	@event = Event.find(params[:id])
 	@address = get_address(@event)
-	other_events = Event.where(:PlayDate => @event.PlayDate.to_date - 5..@event.PlayDate.to_date + 5)
+	other_events = Event.where(:play_date => @event.play_date.to_date - 5..@event.play_date.to_date + 5)
 	
 	#Show related events
 	@other_events = other_events.reject {|event| event.Region != @event.Region || event == @event}
-	@other_events.sort_by(&:PlayDate)
+	@other_events.sort_by(&:play_date)
 end
 
 

@@ -1,5 +1,5 @@
 module ApplicationHelper
-    shops = ["Clevend", "Los Angeles", "London", "Sydney"]
+    
     def sortable(column, title=nil)
         title ||= column.titleize
         direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
@@ -14,6 +14,7 @@ module ApplicationHelper
         cities.each do |city|
             markers << shop_marker(city.Region)
         end
+        markers.uniq!
         markers.reject!{|item| item.empty?}
         marks = ""
         markers.each do |mark|
