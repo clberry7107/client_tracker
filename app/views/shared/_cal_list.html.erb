@@ -1,6 +1,7 @@
 <! Requires 'events' >
 <% if events.count != 0 %>
 	<div class="calendar">
+		<h2>Legend:</br> *  Cleveland, ~ London, v Sydney, < Los Angeles</h2>
 		<div class="cal_break">
 			<h1><%= @year = Date.today.year %></h1>
 			<h2><% @month = Date.today.month %><%= Date.today.strftime('%B') %></h2>

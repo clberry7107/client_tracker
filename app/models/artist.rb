@@ -18,7 +18,14 @@ class Artist < ActiveRecord::Base
 	end
 	
 	def self.clean_url(artist_url)
-		artist_url.gsub('http://', "")
+		cleaned = ""
+		if artist_url.include?("http://") 
+			cleaned = artist_url.sub!('http://', "")
+		end
+		if artist_url.include?("www.")
+			cleaned = cleaned.sub!('www.', "")
+		end
+		return cleaned
 	end
 	
 end
