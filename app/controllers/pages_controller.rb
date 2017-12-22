@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 			session[:start_time] = Time.now
 			
 			if !updated_today?
-				update_cal
+				update_cal(false)
 			end
 			
 			redirect_to events_path

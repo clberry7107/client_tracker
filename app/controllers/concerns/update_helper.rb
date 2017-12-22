@@ -1,9 +1,9 @@
 module UpdateHelper
     
   #Clears and updates Event table
-  def update_cal
-    if !updated_today?
-
+  def update_cal(force)
+    if !updated_today? || force
+      
       p_events = Event.all.where("play_date < ?", Date.today.to_s)
       p_events.each do |pe|
         CityEvent.where(event_id: pe.EventID).destroy_all
@@ -21,7 +21,8 @@ module UpdateHelper
       if all_events.count > 0
         corelated_dates((all_events.first.play_date.to_date..all_events.last.play_date.to_date), all_events)
       end
-      ENV['LAST_UPDATE'] = DateTime.now.to_s
+      est = DateTime.now.in_time_zone('America/New_York')
+      ENV['LAST_UPDATE'] = est.to_s
     end
   end
 

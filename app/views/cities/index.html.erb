@@ -1,7 +1,7 @@
 <div class="header">
 	<h1>City Index</h1>
 </div>
-    <%= fields_for :search do %>
+	<%= fields_for :search do %>
       <%= label_tag "Search this list" %>
       <%= text_field_tag :search %>
     <% end %>
@@ -21,27 +21,14 @@
 					<td><%= @country %></td>
 				</tr>
 				<% @cities.each do |city|%>
-					<% if city.CountryName != @country %>
+					<% if city.events.count > 0 %>
 						<tr>
 							<td><%= @country = city.CountryName %></td>
-						</tr>
-						<tr>
-							<td></td>
 							<td><%= @state = city.State %></td>
-						</tr>
-					<% end %>
-					<% if city.State != @state %>
-						<tr>
-							<td></td>
-							<td><%= @state = city.State %></td>
-						</tr>
-					<% end %>
-					<tr>
-						<td></td>
-						<td></td>
 						<td><%= link_to(city.CityName, city_path(city)) %></td>
 						<td><%= city.events.count %></td>
 					</tr>
+					<% end %>
 				<% end %>
 			</tbody>
 		</table>

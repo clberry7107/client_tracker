@@ -84,13 +84,13 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 h2 {
-  font-size: 1.2em;
+  font-size: 1em;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -98,7 +98,7 @@ h2 {
 }
 
 h3 {
-  font-size: 2em;
+  font-size: .8em;
   margin-bottom: 30px;
   text-align: left;
   font-weight: normal;
@@ -120,8 +120,9 @@ h3 {
 }
 
 .footer{
+  font-size: .75em;
   clear: both;
-  margin-top:25px;
+  margin-top:50px;
   border-top: 1px solid #eaeaea;
   color: #777;
 }
@@ -136,6 +137,7 @@ h3 {
 
 .well{
   background-color: #EDEDED;
+  font-size: .75em;
 }
 
 input, textarea, select, .uneditable-input{
@@ -173,6 +175,7 @@ span.picture{
   margin:5;
   border-radius: 10px;
   padding: 10px;
+  font-size: .8em;
 }
 
 #main_body{
@@ -181,6 +184,10 @@ span.picture{
   margin: 5px;  
   padding-left: 5px;
   border-left: 2px solid black;
+}
+
+#event_details{
+  font-size: .75em;
 }
 
 table{
@@ -214,7 +221,7 @@ a{
   border: 1px solid #d2d2d2;
   box-sizing: border-box;
   width: 100%;
-  
+  font-size: .8em;
 
   .date{
     float: left;
@@ -250,7 +257,7 @@ a{
   }
   
   .cal_break{
-    padding-top: 15px;
+    padding-top: 10px;
     clear: both;
     border: 1px solid #d2d2d2;
     box-sizing: border-box;
@@ -272,4 +279,8 @@ a{
 
 #multiple ul{
   background-color: #B1E01D;
+}
+
+.search_table{
+  font-size: 75%;
 }

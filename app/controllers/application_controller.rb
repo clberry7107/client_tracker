@@ -25,19 +25,20 @@ class ApplicationController < ActionController::Base
   end
   
   def authorized_session?
-    start = Time.parse(session[:start_time])
-    duration = ((Time.now - start)  / 60 ) 
-    duration = duration / 60
+      start = Time.parse(session[:start_time])
+      duration = ((Time.now - start)  / 60 ) 
+      duration = duration / 60
     
-    relog = ""
+      relog = ""
     
-    if duration > 6
-      relog = relog + "/?key=" + ENV['PASSKEY']
-    elsif session[:authorized]
-      return true
-    end
+      if duration > 6
+        relog = relog + "/?key=" + ENV['PASSKEY']
+      elsif session[:authorized]
+        return true
+      end
     
-    redirect_to relog
+      redirect_to relog
+    
   end 
 
   #Pollstar.com API key
@@ -51,7 +52,8 @@ class ApplicationController < ActionController::Base
   end
   
   def last_updated
-    @@last_cal_update = ENV['LAST_UPDATE']
+    f_date = DateTime.parse(ENV['LAST_UPDATE']).strftime("%m/%d/%Y at %I:%M%p")
+    @@last_cal_update = f_date  
   end
   
   def access_levels
